@@ -55,8 +55,10 @@
             }
             tg.sendData(JSON.stringify(data))
     
-            // Navigate to home.html
-            window.location.href = "home.html";
+            function loadContent(url) {
+                var tg = window.Telegram.WebApp;
+                tg.openUrl('https://carrion626.github.io/home.html');
+            }
         });
     </script>
 
