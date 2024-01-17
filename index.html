@@ -56,9 +56,24 @@
             let email = document.getElementById("email").value;
             let tel = document.getElementById("tel").value;
     
-            // Basic checks
-            if (!name || !last_name || !validateEmail(email) || !validateTel(tel)) {
-                alert("Please fill in valid details.");
+           // Basic checks
+           if (!name) {
+                alert("Please enter a valid name.");
+                return;
+            }
+
+            if (!last_name) {
+                alert("Please enter a valid last name.");
+                return;
+            }
+
+            if (!validateEmail(email)) {
+                alert("Please enter a valid email address.");
+                return;
+            }
+
+            if (!validateTel(tel)) {
+                alert("Please enter a valid telephone number.");
                 return;
             }
     
@@ -69,7 +84,7 @@
                 "tel":tel,
             }
 
-            tg.sendData(JSON.stringify(data))
+            // tg.sendData(JSON.stringify(data));
 
             document.getElementById("first_reg").style.display = "none";
             document.getElementById("home").style.display = "block";
