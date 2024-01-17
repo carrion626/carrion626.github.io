@@ -52,7 +52,7 @@
         <img src="images/ысрувгду.jpg">
         <img src="images/ысрувгду.jpg">
         <img src="images/ысрувгду.jpg">
-        <button id="back">Back</button>
+        <button class="back">Back</button>
     </div>
 
     <div id="rt">
@@ -65,7 +65,7 @@
         <img src="images/fhfhfh.jpeg">        
         <img src="images/fhfhfh.jpeg">
         <img src="images/fhfhfh.jpeg">
-        <button id="back">Back</button>
+        <button class="back">Back</button>
     </div>
     
     <script>
@@ -137,12 +137,18 @@
             document.getElementById("rt").style.display = "block";
         });
 
-        back.addEventListener("click", () => {
-            let pages = [reg, reg2, schedule, route, presentation, link, programm, contacts];
-            document.getElementById("sch").style.display = "none";
-            document.getElementById("rt").style.display = "none";
-            document.getElementById("home").style.display = "block";
-        });
+
+
+        let backButtons = document.getElementsByClassName("back");
+        let pages = [reg, reg2, schedule, route, presentation, link, programm, contacts];
+
+        for (let i = 0; i < backButtons.length; i++) {
+            backButtons[i].addEventListener("click", () => {
+                document.getElementById("sch").style.display = "none";
+                document.getElementById("rt").style.display = "none";
+                document.getElementById("home").style.display = "block";
+            });
+        }
     </script>
     
 
