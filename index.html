@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main page</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -24,6 +24,25 @@
             <input type="text" id="city" placeholder="City" >
             <input type="text" id="school" placeholder="school" >
             <input type="text" id="position" placeholder="position">
+            <button id="register">Register</button>
+        </form>
+    </div>
+
+    <div id="reg2">
+        <div class="image-frame">
+            <img src="images/huyatina.jpg" alt="Huyatina Image">
+        </div>
+        <h1>Dentist Event</h1>
+        <form>
+            <!-- ADD "REQUIRED TO EVERY FIELD" -->
+            <input type="text" id="name" placeholder="Name" required> 
+            <input type="text" id="lastname" placeholder="Last Name" >
+            <input type="text" id="email" placeholder="e-mail@gmail.com" >
+            <input type="text" id="tel" placeholder="Tel no (+380_____)" >
+            <input type="text" id="city" placeholder="City" >
+            <input type="text" id="school" placeholder="school" >
+            <input type="text" id="position" placeholder="position">
+            <button class="back">Back</button>
             <button id="register">Register</button>
         </form>
     </div>
@@ -67,6 +86,54 @@
         <img src="images/fhfhfh.jpeg">
         <button class="back">Back</button>
     </div>
+
+    <div id="pr">
+        <div class="image-frame">
+            <img src="images/33212.jpg" alt="Huyatina Image">
+        </div>
+        <h1>Route</h1>
+        <h1>Some names of speakers</h1>
+        <button class="speaker">Dolboeb</button>
+        <button class="speaker">Daun</button>
+        <button class="speaker">Mudila</button>
+        
+        <button class="back">Back</button>
+    </div>
+
+    <div id="pgm">
+        <div class="image-frame">
+            <img src="images/33212.jpg" alt="Huyatina Image">
+        </div>
+        <h1>Programm</h1>
+        <p id="programmText">Some text up to 1000 chars</p>
+        <img src="images/fhfhfh.jpeg">
+        <img src="images/fhfhfh.jpeg">
+        <img src="images/fhfhfh.jpeg">        
+        <img src="images/fhfhfh.jpeg">
+        <img src="images/fhfhfh.jpeg">
+        
+        <button class="back">Back</button>
+    </div>
+
+    <div id="cts">
+        <div class="image-frame">
+            <img src="images/33212.jpg" alt="Huyatina Image">
+        </div>
+        <h1>WHAT?</h1>
+
+        
+        <button class="back">Back</button>
+    </div>
+
+
+
+<!-- For "Programm", limiting <p> Up to 1000 chars -->
+    <script>
+        let programmText = document.getElementById("programmText");
+        if (programmText.textContent.length > 1000) {
+            programmText.textContent = programmText.textContent.substring(0, 1000) + '...';
+        }
+    </script>
     
     <script>
         let tg = window.Telegram.WebApp;
@@ -125,8 +192,12 @@
         let back = document.getElementById("back");
         tg.expand()
 
-        
 
+        reg2.addEventListener("click", () => {
+            document.getElementById("home").style.display = "none";
+            document.getElementById("reg2").style.display = "block";
+        });
+        
         schedule.addEventListener("click", () => {
             document.getElementById("home").style.display = "none";
             document.getElementById("sch").style.display = "block";
@@ -137,15 +208,38 @@
             document.getElementById("rt").style.display = "block";
         });
 
+        presentation.addEventListener("click", () => {
+            document.getElementById("home").style.display = "none";
+            document.getElementById("pr").style.display = "block";
+        });
+
+        link.addEventListener("click", () => {
+            window.location.href = "https://miro.com/app/board/uXjVN4lad2k=/";
+        })
+
+        programm.addEventListener("click", () => {
+            document.getElementById("home").style.display = "none";
+            document.getElementById("pgm").style.display = "block";
+        });
+
+        contacts.addEventListener("click", () => {
+            document.getElementById("home").style.display = "none";
+            document.getElementById("cts").style.display = "block";
+        });
+
 
 
         let backButtons = document.getElementsByClassName("back");
-        let pages = [reg, reg2, schedule, route, presentation, link, programm, contacts];
 
         for (let i = 0; i < backButtons.length; i++) {
             backButtons[i].addEventListener("click", () => {
-                document.getElementById("sch").style.display = "none";
-                document.getElementById("rt").style.display = "none";
+                // Hide all sections except the home section
+                let sections = document.querySelectorAll("#reg2, #sch, #rt, #pr, #pgm, #cts");
+                sections.forEach(section => {
+                    section.style.display = "none";
+                });
+
+                // Show the home section
                 document.getElementById("home").style.display = "block";
             });
         }
