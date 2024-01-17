@@ -11,26 +11,43 @@
     <div class="image-frame">
         <img src="images/huyatina.jpg" alt="Huyatina Image">
     </div>
-    <h1>Dentist Event</h1>
-    <form>
-        <!-- ADD "REQUIRED TO EVERY FIELD" -->
-        <input type="text" id="name" placeholder="Name" required> 
-        <input type="text" id="lastname" placeholder="Last Name" >
-        <input type="text" id="email" placeholder="e-mail@gmail.com" >
-        <input type="text" id="tel" placeholder="Tel no (+380_____)" >
-        <input type="text" id="city" placeholder="City" >
-        <input type="text" id="school" placeholder="school" >
-        <input type="text" id="position" placeholder="position">
+
+    <div id="first_reg">
+        <h1>Dentist Event</h1>
+        <form>
+            <!-- ADD "REQUIRED TO EVERY FIELD" -->
+            <input type="text" id="name" placeholder="Name" required> 
+            <input type="text" id="lastname" placeholder="Last Name" >
+            <input type="text" id="email" placeholder="e-mail@gmail.com" >
+            <input type="text" id="tel" placeholder="Tel no (+380_____)" >
+            <input type="text" id="city" placeholder="City" >
+            <input type="text" id="school" placeholder="school" >
+            <input type="text" id="position" placeholder="position">
+            <button id="register">Register</button>
+        </form>
+    </div>
+
+
+    <div id="home">
+        <div class="image-frame">
+            <img src="images/huyatina.jpg" alt="Huyatina Image">
+        </div>
+        <h1>Home Page</h1>
         <button id="register">Register</button>
-    </form>
+        <button id="register">Register</button>
+        <button id="register">Register</button>
+        <button id="register">Register</button>
+        <button id="register">Register</button>
+        <button id="register">Register</button>
+        <button id="register">Register</button>
+    </div>
     
     
     <script>
         let tg = window.Telegram.WebApp;
         let reg = document.getElementById("register");
         tg.expand()
-        tg.ready(); // Signal that the Mini App is ready
-    
+
         reg.addEventListener("click", () => {
             // Get input values
             let name = document.getElementById("name").value();
@@ -50,8 +67,10 @@
                 "email":email,
                 "tel":tel,
             }
-            
+
             tg.sendData(JSON.stringify(data))
+            document.getElementById("first_reg").style.display = "none";
+            document.getElementById("home").style.display = "block";
     
             function loadContent(url) {
                 var tg = window.Telegram.WebApp;
