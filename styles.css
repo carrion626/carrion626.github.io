@@ -74,6 +74,7 @@ img {
     margin: 0 auto; /* Center the image within the frame */
 }
 
-#home {
+#home, #sch, #rt {
     display: none;
 }
+

@@ -34,15 +34,41 @@
             <img src="images/huyatina.jpg" alt="Huyatina Image">
         </div>
         <h1>Home Page</h1>
-        <button id="register">Register</button>
-        <button id="register">Register</button>
-        <button id="register">Register</button>
-        <button id="register">Register</button>
-        <button id="register">Register</button>
-        <button id="register">Register</button>
-        <button id="register">Register</button>
+        <button id="register2">Register</button>
+        <button id="schedule">schedule</button>
+        <button id="route">route</button>
+        <button id="presentation">presentation</button>
+        <button id="link">link</button>
+        <button id="programm">programm</button>
+        <button id="contacts">contacts</button>
     </div>
     
+
+    <div id="sch">
+        <div class="image-frame">
+            <img src="images/33212.jpg" alt="Huyatina Image">
+        </div>
+        <h1>schedule</h1>
+        <img src="images/ысрувгду.jpg">
+        <img src="images/ысрувгду.jpg">
+        <img src="images/ысрувгду.jpg">
+        <img src="images/ысрувгду.jpg">
+        <img src="images/ысрувгду.jpg">
+        <button id="back">Back</button>
+    </div>
+
+    <div id="rt">
+        <div class="image-frame">
+            <img src="images/33212.jpg" alt="Huyatina Image">
+        </div>
+        <h1>Route</h1>
+        <img src="images/fhfhfh.jpeg">
+        <img src="images/fhfhfh.jpeg">
+        <img src="images/fhfhfh.jpeg">        
+        <img src="images/fhfhfh.jpeg">
+        <img src="images/fhfhfh.jpeg">
+        <button id="back">Back</button>
+    </div>
     
     <script>
         let tg = window.Telegram.WebApp;
@@ -51,45 +77,76 @@
 
         reg.addEventListener("click", () => {
             // Get input values
+            event.preventDefault();
+
             let name = document.getElementById("name").value;
             let last_name = document.getElementById("lastname").value;
             let email = document.getElementById("email").value;
             let tel = document.getElementById("tel").value;
-    
-           // Basic checks
-           if (!name) {
-                alert("Please enter a valid name.");
-                return;
-            }
 
-            if (!last_name) {
-                alert("Please enter a valid last name.");
-                return;
-            }
+                    //    // Basic checks
+        //    if (!name) {
+        //         alert("Please enter a valid name.");
+        //         return;
+        //     }
 
-            if (!validateEmail(email)) {
-                alert("Please enter a valid email address.");
-                return;
-            }
+        //     if (!last_name) {
+        //         alert("Please enter a valid last name.");
+        //         return;
+        //     }
 
-            if (!validateTel(tel)) {
-                alert("Please enter a valid telephone number.");
-                return;
-            }
-    
-            let data = {
-                "name":name,
-                "last name": last_name,
-                "email":email,
-                "tel":tel,
-            }
+        //     if (!validateEmail(email)) {
+        //         alert("Please enter a valid email address.");
+        //         return;
+        //     }
 
-            // tg.sendData(JSON.stringify(data));
+        //     if (!validateTel(tel)) {
 
+                    //     let data = {
+        //         "name":name,
+        //         "last name": last_name,
+        //         "email":email,
+        //         "tel":tel,
+        //     }
+
+        //     // tg.sendData(JSON.stringify(data));
+           
             document.getElementById("first_reg").style.display = "none";
+            document.getElementById("home").style.display = "block";
+        })
+    </script>
+
+    <script>
+        let reg2 = document.getElementById("register2");
+        let schedule = document.getElementById("schedule");
+        let route = document.getElementById("route");
+        let presentation = document.getElementById("presentation");
+        let link = document.getElementById("link");
+        let programm = document.getElementById("programm");
+        let contacts = document.getElementById("contacts");
+        let back = document.getElementById("back");
+        tg.expand()
+
+        
+
+        schedule.addEventListener("click", () => {
+            document.getElementById("home").style.display = "none";
+            document.getElementById("sch").style.display = "block";
+        });
+
+        route.addEventListener("click", () => {
+            document.getElementById("home").style.display = "none";
+            document.getElementById("rt").style.display = "block";
+        });
+
+        back.addEventListener("click", () => {
+            let pages = [reg, reg2, schedule, route, presentation, link, programm, contacts];
+            document.getElementById("sch").style.display = "none";
+            document.getElementById("rt").style.display = "none";
             document.getElementById("home").style.display = "block";
         });
     </script>
+
 
 </body>
 </html>
