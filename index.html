@@ -112,7 +112,7 @@
                 "tel": tel,
             }
             tg.sendData(JSON.stringify(data));
-            tg.navigate("home.html");
+            window.location.href = "home.html";
         });
 
         // Function to validate email address
