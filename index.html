@@ -112,9 +112,11 @@
                 "email": email,
                 "tel": tel,
             }
-            tg.sendData(JSON.stringify(data));
-            window.location.href = "home.html";
+            tg.sendData(JSON.stringify(data), () => {
+            // Callback function: Navigate after sending data
+            tg.navigate("home.html");
         });
+    });
 
         // Function to validate email address
         function validateEmail(email) {
