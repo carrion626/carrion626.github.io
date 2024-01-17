@@ -50,10 +50,10 @@
 
         reg.addEventListener("click", () => {
             // Get input values
-            let name = document.getElementById("name").value();
-            let last_name = document.getElementById("lastname").value();
-            let email = document.getElementById("email").value();
-            let tel = document.getElementById("tel").value();
+            let name = document.getElementById("name").value;
+            let last_name = document.getElementById("lastname").value;
+            let email = document.getElementById("email").value;
+            let tel = document.getElementById("tel").value;
     
             // Basic checks
             if (!name || !last_name || !validateEmail(email) || !validateTel(tel)) {
@@ -69,13 +69,9 @@
             }
 
             tg.sendData(JSON.stringify(data))
+
             document.getElementById("first_reg").style.display = "none";
             document.getElementById("home").style.display = "block";
-    
-            function loadContent(url) {
-                var tg = window.Telegram.WebApp;
-                tg.openUrl('https://carrion626.github.io/home.html');
-            }
         });
     </script>
 
