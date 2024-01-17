@@ -33,10 +33,10 @@
     
         reg.addEventListener("click", () => {
             // Get input values
-            let name = document.getElementById("name").value.trim();
-            let last_name = document.getElementById("lastname").value.trim();
-            let email = document.getElementById("email").value.trim();
-            let tel = document.getElementById("tel").value.trim();
+            let name = document.getElementById("name").value();
+            let last_name = document.getElementById("lastname").value();
+            let email = document.getElementById("email").value();
+            let tel = document.getElementById("tel").value();
     
             // Basic checks
             if (!name || !last_name || !validateEmail(email) || !validateTel(tel)) {
@@ -47,8 +47,13 @@
             // Send data by triggering an interaction with the bot
             let message = `New registration:\nName: ${name}\nLast Name: ${last_name}\nEmail: ${email}\nTel: ${tel}`;
     
-            // Trigger a command or send a message to the bot with the data
-            tg.sendMessage(message);
+            let data = {
+                "name":name,
+                "last name": last_name,
+                "email":email,
+                "tel":tel,
+            }
+            tg.sendData(JSON.stringify(data))
     
             // Navigate to home.html
             window.location.href = "home.html";
