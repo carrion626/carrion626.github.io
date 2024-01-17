@@ -42,9 +42,36 @@
 </head>
 <body>
     <h1>Dentist Event</h1>
-    <p>Form should be here !!!</p>
-    <button id="register">Register</button>
+    <form>
+        <input type="text" id="name" placeholder="Name" required>
+        <input type="text" id="lastname" placeholder="Last Name" required>
+        <input type="text" id="email" placeholder="e-mail@gmail.com" required>
+        <input type="text" id="tel" placeholder="Tel no (+380_____)" required>
+        <input type="text" id="city" placeholder="City" required>
+        <input type="text" id="school" placeholder="school" required>
+        <input type="text" id="position" placeholder="position" required>
+        <button id="register">Register</button>
+    </form>
+    
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script>
+        let tg = window.Telegram.WebApp;
+        let reg = document.getElementById("register");
+        tg.expand();
+
+        reg.addEventListener("click", () =>{
+            let name = document.getElementById("name").value;
+            let last_name = document.getElementById("lastname").value;
+            let email = document.getElementById("email").value;
+
+            let data = {
+                "name":name,
+                "last name":last_name,
+                "email":email,
+            }
+
+        })
+    </script>
 
 </body>
 </html>
