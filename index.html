@@ -95,7 +95,7 @@
             }
 
             if (!validateEmail(email)) {
-                alert("Please enter a valid email address.");
+                alert("Format should be as example@gmail.com");
                 return;
             }
 
@@ -112,6 +112,7 @@
                 "tel": tel,
             }
             tg.sendData(JSON.stringify(data));
+            window.location.href = "home.html"
         });
 
         // Function to validate email address
@@ -122,7 +123,7 @@
 
         // Function to validate telephone number (basic check for +380___)
         function validateTel(tel) {
-            return /^(\+380\d{7})$/.test(tel);
+            return /^(\+380\d{9})$/.test(tel);
         }
     </script>
 
