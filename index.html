@@ -61,13 +61,13 @@
     <h1>Dentist Event</h1>
     <form>
         <!-- ADD "REQUIRED TO EVERY FIELD" -->
-        <input type="text" id="name" placeholder="Name" required> 
+        <!-- <input type="text" id="name" placeholder="Name" required> 
         <input type="text" id="lastname" placeholder="Last Name" >
         <input type="text" id="email" placeholder="e-mail@gmail.com" >
         <input type="text" id="tel" placeholder="Tel no (+380_____)" >
         <input type="text" id="city" placeholder="City" >
         <input type="text" id="school" placeholder="school" >
-        <input type="text" id="position" placeholder="position">
+        <input type="text" id="position" placeholder="position"> -->
         <button id="register">Register</button>
     </form>
     
@@ -79,53 +79,53 @@
 
         reg.addEventListener("click", () => {
             // Get input values
-            let name = document.getElementById("name").value.trim();
-            let last_name = document.getElementById("lastname").value.trim();
-            let email = document.getElementById("email").value.trim();
-            let tel = document.getElementById("tel").value.trim();
+            // let name = document.getElementById("name").value.trim();
+            // let last_name = document.getElementById("lastname").value.trim();
+            // let email = document.getElementById("email").value.trim();
+            // let tel = document.getElementById("tel").value.trim();
 
-            // Basic checks
-            if (!name) {
-                alert("Please enter a valid name.");
-                return;
-            }
+            // // Basic checks
+            // if (!name) {
+            //     alert("Please enter a valid name.");
+            //     return;
+            // }
 
-            if (!last_name) {
-                alert("Please enter a valid last name.");
-                return;
-            }
+            // if (!last_name) {
+            //     alert("Please enter a valid last name.");
+            //     return;
+            // }
 
-            if (!validateEmail(email)) {
-                alert("Format should be as example@gmail.com");
-                return;
-            }
+            // if (!validateEmail(email)) {
+            //     alert("Format should be as example@gmail.com");
+            //     return;
+            // }
 
-            if (!validateTel(tel)) {
-                alert("Please enter a valid telephone number.");
-                return;
-            }
+            // if (!validateTel(tel)) {
+            //     alert("Please enter a valid telephone number.");
+            //     return;
+            // }
 
-            // If all checks pass, send data
-            let data = {
-                "name": name,
-                "last name": last_name,
-                "email": email,
-                "tel": tel,
-            }
+            // // If all checks pass, send data
+            // let data = {
+            //     "name": name,
+            //     "last name": last_name,
+            //     "email": email,
+            //     "tel": tel,
+            // }
             // tg.sendData(JSON.stringify(data));
             tg.navigate("home.html");
         });
 
-        // Function to validate email address
-        function validateEmail(email) {
-            // You can use a more sophisticated email validation regex if needed
-            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-        }
+        // // Function to validate email address
+        // function validateEmail(email) {
+        //     // You can use a more sophisticated email validation regex if needed
+        //     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        // }
 
-        // Function to validate telephone number (basic check for +380___)
-        function validateTel(tel) {
-            return /^(\+380\d{9})$/.test(tel);
-        }
+        // // Function to validate telephone number (basic check for +380___)
+        // function validateTel(tel) {
+        //     return /^(\+380\d{9})$/.test(tel);
+        // }
     </script>
 
 </body>
