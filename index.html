@@ -28,6 +28,7 @@
     <script>
         let tg = window.Telegram.WebApp;
         let reg = document.getElementById("register");
+        tg.expand()
         tg.ready(); // Signal that the Mini App is ready
     
         reg.addEventListener("click", () => {
