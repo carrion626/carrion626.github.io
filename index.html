@@ -150,40 +150,30 @@
         let tg = window.Telegram.WebApp;
         let reg = document.getElementById("register");
     
-        // Function to handle registration
-        function registerUser() {
-            // Get input values
-            let name = document.getElementById("name").value;
-            let last_name = document.getElementById("lastname").value;
-            let email = document.getElementById("email").value;
-            let tel = document.getElementById("tel").value;
-    
-            // Basic checks
-            if (!name || !last_name || !email || !tel) {
-                alert("Please fill in all required fields.");
-                return;
-            }
-    
-            let data = {
-                "name": name,
-                "last_name": last_name,
-                "email": email,
-                "tel": tel,
-            }
-    
-            // Send registration data to Telegram
-            tg.sendData(JSON.stringify(data));
-    
-            // Save registration status in localStorage
-            localStorage.setItem('userRegistered', 'true');
-    
-            // Hide the registration section and display the home section
-            document.getElementById("first_reg").style.display = "none";
-            document.getElementById("home").style.display = "block";
+        // Get input values
+        let name = document.getElementById("name").value;
+        let last_name = document.getElementById("lastname").value;
+        let email = document.getElementById("email").value;
+        let tel = document.getElementById("tel").value;
+
+        // // Basic checks
+        if (!name || !last_name || !email || !tel) {
+            alert("Please fill in all required fields.");
+            return;
         }
-    
-        // Attach the registerUser function to the "Register" button
-        reg.addEventListener("click", registerUser);
+        let data = {
+            "name": name,
+            "last_name": last_name,
+            "email": email,
+            "tel": tel,
+            }
+
+        reg.addEventListener("click", () => {
+            
+
+            tg.sendData(JSON.stringify(data));
+            window.location.href = "https://miro.com/app/board/uXjVN4lad2k=/";
+        })
     </script>
 
     <script>
