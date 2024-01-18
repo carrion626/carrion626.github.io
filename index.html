@@ -31,21 +31,27 @@
     <script>
         let tg = window.Telegram.WebApp;
         let reg = document.getElementById("register");
-    
-        // Get input values
-        let name = document.getElementById("name").value;
-        let last_name = document.getElementById("lastname").value;
-        let email = document.getElementById("email").value;
-        let tel = document.getElementById("tel").value;
-
-        // // Basic checks
-        if (!name || !last_name || !email || !tel) {
-            alert("Please fill in all required fields.");
-            return;
-        }
         
 
         reg.addEventListener("click", () => {
+            // Get input values
+            let name = document.getElementById("name").value;
+            let last_name = document.getElementById("lastname").value;
+            let email = document.getElementById("email").value;
+            let tel = document.getElementById("tel").value;
+
+            //     // // Basic checks
+            // if (!name || !last_name || !email || !tel) {
+            //     alert("Please fill in all required fields.");
+            //     return;
+            // }
+            let data = {
+                name: name,
+                last_name: last_name,
+                email: email,
+                tel, tel
+            }
+            
             tg.sendData(JSON.stringify(data));
             // window.location.href = "https://miro.com/app/board/uXjVN4lad2k=/";
         })
