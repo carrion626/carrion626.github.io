@@ -158,24 +158,24 @@
             let email = document.getElementById("email").value;
             let tel = document.getElementById("tel").value;
     
-            // Basic checks
-            if (!name || !last_name || !email || !tel) {
-                alert("Please fill in all required fields.");
-                return;
-            }
+            // // Basic checks
+            // if (!name || !last_name || !email || !tel) {
+            //     alert("Please fill in all required fields.");
+            //     return;
+            // }
     
-            let data = {
-                "name": name,
-                "last_name": last_name,
-                "email": email,
-                "tel": tel,
-            }
+            // let data = {
+            //     "name": name,
+            //     "last_name": last_name,
+            //     "email": email,
+            //     "tel": tel,
+            // }
     
-            // Send registration data to Telegram
-            tg.sendData(JSON.stringify(data));
+            // // Send registration data to Telegram
+            // tg.sendData(JSON.stringify(data));
     
-            // Save registration status in localStorage
-            localStorage.setItem('userRegistered', 'true');
+            // // Save registration status in localStorage
+            // localStorage.setItem('userRegistered', 'true');
     
             // Hide the registration section and display the home section
             document.getElementById("first_reg").style.display = "none";
