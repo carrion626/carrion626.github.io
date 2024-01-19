@@ -11,21 +11,27 @@
 
     <div id="preview">
         <img id="image" src="images/huyatina.jpg" style="display: block; max-width: calc(100vw - 40px); max-height: calc(100vh - 40px); margin: auto; padding: 20px;">
-        <button id="next" style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);">Next -></button>
+        <button id="next" style="position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);">Next -></button>
     </div>
+
+
 
     <div id="first_reg" style="display: none;">
         <div class="image-frame">
             <img src="images/huyatina.jpg" alt="Huyatina Image">
         </div>
         <h1>Dentist Event</h1>
-        <form id="registrationForm">
+        <form method="POST">
+            <!-- ADD "REQUIRED TO EVERY FIELD" -->
             <input type="text" id="name" placeholder="Name" required> 
-            <input type="text" id="lastname" placeholder="Last Name">
-            <input type="text" id="email" placeholder="e-mail@gmail.com">
-            <input type="text" id="tel" placeholder="Tel no (+380_____)">
-            <input type="text" id="city" placeholder="City">
-            <input type="text" id="school" placeholder="school">
+            <input type="text" id="lastname" placeholder="Last Name" >
+            <input type="text" id="email" placeholder="e-mail@gmail.com" >
+            <input type="text" id="tel" placeholder="Tel no (+380_____)" >
+            <input type="text" id="city" placeholder="City" >
+            <input type="text" id="school" placeholder="school" >
             <input type="text" id="position" placeholder="position">
             <button id="register">Register</button>
         </form>
@@ -36,24 +42,28 @@
         let currentIndex = 0;
 
         let tg = window.Telegram.WebApp;
-        tg.expand();
+        tg.expand()
+        tg.ready()
 
         const image = document.getElementById('image');
         const previewDiv = document.getElementById('preview');
         const firstRegDiv = document.getElementById('first_reg');
         const nextButton = document.getElementById('next');
         const registerButton = document.getElementById('register');
-        const registrationForm = document.getElementById('registrationForm');
 
         nextButton.addEventListener('click', () => {
+            // Update the index for the next image
             currentIndex = (currentIndex + 1) % images.length;
-
+            
             if (currentIndex === 0) {
+                // If the end is reached, hide "preview" and show "first_reg"
                 previewDiv.style.display = 'none';
                 firstRegDiv.style.display = 'block';
             } else {
+                // Set the 'src' attribute to the next image
                 image.src = 'images/' + images[currentIndex];
             }
+
         });
 
         document.body.addEventListener('click', (event) => {
@@ -63,17 +73,24 @@
                 document.activeElement.blur();
             }
         });
+    </script>
 
-        registrationForm.addEventListener('submit', async (event) => {
+    <script>
+        let reg = document.getElementById("register");
+    
+        reg.addEventListener("click", async (event) => {
+            // Prevent the default form submission behavior
             event.preventDefault();
 
-            let name = document.getElementById('name').value;
-            let last_name = document.getElementById('lastname').value;
-            let email = document.getElementById('email').value;
-            let tel = document.getElementById('tel').value;
+            // Get input values
+            let name = document.getElementById("name").value;
+            let last_name = document.getElementById("lastname").value;
+            let email = document.getElementById("email").value;
+            let tel = document.getElementById("tel").value;
 
+            // Basic checks
             if (!name || !last_name || !email || !tel) {
-                alert('Please fill in all required fields.');
+                alert("Please fill in all required fields.");
                 return;
             }
 
@@ -85,6 +102,7 @@
             };
 
             try {
+                // Make an HTTP POST request to your server
                 let response = await fetch('http://localhost:3000/submit_registration', {
                     method: 'POST',
                     headers: {
@@ -94,8 +112,11 @@
                 });
 
                 if (response.ok) {
+                    // Server successfully processed the request
                     let responseData = await response.json();
                     console.log(responseData);
+
+                    // Redirect or perform other actions based on the response
                     window.location.href = 'https://carrion626.github.io/home.html';
                 } else {
                     console.error('Server returned an error:', response.status);
@@ -104,6 +125,8 @@
                 console.error('Error:', error);
             }
         });
+
     </script>
+      
 </body>
 </html>
