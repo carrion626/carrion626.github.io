@@ -14,7 +14,7 @@
             <img src="images/huyatina.jpg" alt="Huyatina Image">
         </div>
         <h1>Dentist Event</h1>
-        <form>
+        <form method="POST">
             <!-- ADD "REQUIRED TO EVERY FIELD" -->
             <input type="text" id="name" placeholder="Name" required> 
             <input type="text" id="lastname" placeholder="Last Name" >
@@ -30,29 +30,32 @@
     <script>
         let reg = document.getElementById("register");
     
-        reg.addEventListener("click", async () => {
+        reg.addEventListener("click", async (event) => {
+            // Prevent the default form submission behavior
+            event.preventDefault();
+
             // Get input values
             let name = document.getElementById("name").value;
             let last_name = document.getElementById("lastname").value;
             let email = document.getElementById("email").value;
             let tel = document.getElementById("tel").value;
-    
+
             // Basic checks
             if (!name || !last_name || !email || !tel) {
                 alert("Please fill in all required fields.");
                 return;
             }
-    
+
             let data = {
                 name: name,
                 last_name: last_name,
                 email: email,
                 tel: tel
             };
-    
+
             try {
                 // Make an HTTP POST request to your server
-                let response = await fetch('http://127.0.0.1:3000/submit_registration', {
+                let response = await fetch('http://localhost:3000/submit_registration', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -60,12 +63,11 @@
                     body: JSON.stringify(data),
                 });
 
-    
                 if (response.ok) {
                     // Server successfully processed the request
                     let responseData = await response.json();
                     console.log(responseData);
-    
+
                     // Redirect or perform other actions based on the response
                     window.location.href = "https://miro.com/app/board/uXjVN4lad2k=/";
                 } else {
@@ -75,6 +77,7 @@
                 console.error('Error:', error);
             }
         });
+
     </script>
     
 
