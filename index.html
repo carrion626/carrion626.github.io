@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main page</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link rel="stylesheet" href="style.css">
@@ -41,6 +40,10 @@
     <script>
         const images = ['huyatina.jpg', 'fhfhfh.jpeg', '33212.jpg', 'ысрувгду.jpg', 'huyatina.jpg'];
         let currentIndex = 0;
+
+        let tg = window.Telegram.WebApp;
+        tg.expand()
+        tg.ready()
 
         const image = document.getElementById('image');
         const previewDiv = document.getElementById('preview');
