@@ -79,10 +79,3 @@ img {
 #home, #sch, #rt, #pr, #pgm, #cts, #reg2 {
     display: none;
 }
-
-.back {
-    position: fixed;
-    bottom: 20px;  /* Adjust this value as needed */
-    left: 50%;
-    transform: translateX(-50%);
-}
