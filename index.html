@@ -62,7 +62,11 @@
         });
 
         document.body.addEventListener('click', (event) => {
-            document.activeElement.blur();
+            const clickedElement = event.target;
+
+            if (clickedElement.tagName !== 'INPUT' && clickedElement !== registerButton) {
+                document.activeElement.blur();
+            }
         });
     </script>
 
