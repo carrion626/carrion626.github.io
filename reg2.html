@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main page</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="first_reg">
+        <div class="image-frame">
+            <img src="images/huyatina.jpg" alt="Huyatina Image">
+        </div>
+        <h1>Dentist Event</h1>
+        <form method="POST">
+            <!-- ADD "REQUIRED TO EVERY FIELD" -->
+            <input type="text" id="name" placeholder="Name" required> 
+            <input type="text" id="lastname" placeholder="Last Name" >
+            <input type="text" id="email" placeholder="e-mail@gmail.com" >
+            <input type="text" id="tel" placeholder="Tel no (+380_____)" >
+            <input type="text" id="city" placeholder="City" >
+            <input type="text" id="school" placeholder="school" >
+            <input type="text" id="position" placeholder="position">
+            <button id="register">Register</button>
+            <button id="back">Back</button>
+        </form>
+    </div>
+
+    <script>
+        let reg = document.getElementById("register");
+        let back = document.getElementById("back");
+
+        back.addEventListener("click", async (event) => {
+            window.location.href = "https://carrion626.github.io/carrion626.github.io/home.html";
+        })
+    
+        reg.addEventListener("click", async (event) => {
+            // Prevent the default form submission behavior
+            event.preventDefault();
+
+            // Get input values
+            let name = document.getElementById("name").value;
+            let last_name = document.getElementById("lastname").value;
+            let email = document.getElementById("email").value;
+            let tel = document.getElementById("tel").value;
+
+            // Basic checks
+            if (!name || !last_name || !email || !tel) {
+                alert("Please fill in all required fields.");
+                return;
+            }
+
+            let data = {
+                name: name,
+                last_name: last_name,
+                email: email,
+                tel: tel
+            };
+
+            try {
+                // Make an HTTP POST request to your server
+                let response = await fetch('http://localhost:3000/submit_registration', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                });
+
+                if (response.ok) {
+                    // Server successfully processed the request
+                    let responseData = await response.json();
+                    console.log(responseData);
+
+                    // Redirect or perform other actions based on the response
+                    window.location.href = "https://carrion626.github.io/carrion626.github.io/home.html";
+                } else {
+                    console.error('Server returned an error:', response.status);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        });
+
+    </script>
+      
+</body>
+</html>
