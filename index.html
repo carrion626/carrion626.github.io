@@ -62,6 +62,11 @@
 
     <script>
         let reg = document.getElementById("register");
+
+        document.body.addEventListener('click', (event) => {
+            // Blur the active element to hide the keyboard
+            document.activeElement.blur();
+        });
     
         reg.addEventListener("click", async (event) => {
             // Prevent the default form submission behavior
