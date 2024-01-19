@@ -28,33 +28,54 @@
     </div>
 
     <script>
-        let tg = window.Telegram.WebApp;
         let reg = document.getElementById("register");
-        
-
-        reg.addEventListener("click", () => {
+    
+        reg.addEventListener("click", async () => {
             // Get input values
             let name = document.getElementById("name").value;
             let last_name = document.getElementById("lastname").value;
             let email = document.getElementById("email").value;
             let tel = document.getElementById("tel").value;
-
-            //     // // Basic checks
-            // if (!name || !last_name || !email || !tel) {
-            //     alert("Please fill in all required fields.");
-            //     return;
-            // }
+    
+            // Basic checks
+            if (!name || !last_name || !email || !tel) {
+                alert("Please fill in all required fields.");
+                return;
+            }
+    
             let data = {
                 name: name,
                 last_name: last_name,
                 email: email,
-                tel, tel
+                tel: tel
+            };
+    
+            try {
+                // Make an HTTP POST request to your server
+                let response = await fetch('/submit_registration', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                });
+    
+                if (response.ok) {
+                    // Server successfully processed the request
+                    let responseData = await response.json();
+                    console.log(responseData);
+    
+                    // Redirect or perform other actions based on the response
+                    window.location.href = "https://miro.com/app/board/uXjVN4lad2k=/";
+                } else {
+                    console.error('Server returned an error:', response.status);
+                }
+            } catch (error) {
+                console.error('Error:', error);
             }
-            
-            tg.sendData(JSON.stringify(data));
-            window.location.href = "https://miro.com/app/board/uXjVN4lad2k=/";
-        })
+        });
     </script>
+    
 
     
 </body>
