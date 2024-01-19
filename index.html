@@ -77,14 +77,6 @@
                 document.activeElement.blur();
             }
         });
-
-        // Check if the user has already registered
-        const hasRegistered = localStorage.getItem('hasRegistered');
-
-        if (hasRegistered) {
-            // User has already registered, redirect to home.html
-            window.location.href = 'https://carrion626.github.io/home.html';
-        }
     </script>
 
     <script>
@@ -128,8 +120,6 @@
                     // Server successfully processed the request
                     let responseData = await response.json();
                     console.log(responseData);
-                    // Assume registration is successful, store the flag in localStorage
-                    localStorage.setItem('hasRegistered', 'true');
 
                     // Redirect or perform other actions based on the response
                     window.location.href = 'https://carrion626.github.io/home.html';
@@ -140,7 +130,6 @@
                 console.error('Error:', error);
             }
         });
-        
 
     </script>
       
