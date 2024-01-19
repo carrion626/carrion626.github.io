@@ -34,14 +34,6 @@
     <script>
         const registerButton = document.getElementById('register');
 
-        document.body.addEventListener('click', (event) => {
-            const clickedElement = event.target;
-
-            if (clickedElement.tagName !== 'INPUT' && clickedElement !== registerButton) {
-                document.activeElement.blur();
-            }
-        });
-
 
         let reg = document.getElementById("register");
         let back = document.getElementById("back");
@@ -95,6 +87,14 @@
                 }
             } catch (error) {
                 console.error('Error:', error);
+            }
+        });
+        
+        document.body.addEventListener('click', (event) => {
+            const clickedElement = event.target;
+
+            if (clickedElement.tagName !== 'INPUT' && clickedElement !== registerButton) {
+                document.activeElement.blur();
             }
         });
 
