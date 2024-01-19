@@ -58,11 +58,11 @@
                 // Set the 'src' attribute to the next image
                 image.src = 'images/' + images[currentIndex];
             }
-            
-            document.body.addEventListener('click', (event) => {
-            // Blur the active element to hide the keyboard
-            document.activeElement.blur();
+
         });
+
+        document.body.addEventListener('click', (event) => {
+            document.activeElement.blur();
         });
     </script>
 
