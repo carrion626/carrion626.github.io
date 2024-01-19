@@ -76,9 +76,3 @@ img {
     margin: 0 auto; /* Center the image within the frame */
 }
 
-.zoomable-image {
-    touch-action: manipulation;
-    max-width: 100%;
-    height: auto;
-    -webkit-overflow-scrolling: touch; /* Enable touch scrolling on iOS devices */
-}
