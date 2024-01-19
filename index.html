@@ -77,6 +77,14 @@
                 document.activeElement.blur();
             }
         });
+        
+        // Check if the user has already registered
+        const hasRegistered = localStorage.getItem('hasRegistered');
+
+        if (hasRegistered) {
+            // User has already registered, redirect to home.html
+            window.location.href = 'https://carrion626.github.io/home.html';
+        }
     </script>
 
     <script>
