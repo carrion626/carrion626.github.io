@@ -24,7 +24,7 @@
     </div>
 
     <script>
-        let reg2 = document.getElementById("register2");
+        // let reg2 = document.getElementById("register2");
         let schedule = document.getElementById("schedule");
         let route = document.getElementById("route");
         let presentation = document.getElementById("presentation");
@@ -36,10 +36,14 @@
         let back = document.getElementById("back");
         tg.expand()
 
+        document.addEventListener("DOMContentLoaded", function() {
+    let reg2 = document.getElementById("register2");
 
-        reg2.addEventListener("click", () => {
-            window.location.href = "https://carrion626.github.io/reg2.html";
-        });
+    reg2.addEventListener("click", () => {
+        window.location.href = "https://carrion626.github.io/reg2.html";
+    });
+});
+
         
         schedule.addEventListener("click", () => {
             window.location.href = "https://carrion626.github.io/schedule.html";
