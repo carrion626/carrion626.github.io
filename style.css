@@ -76,6 +76,3 @@ img {
     margin: 0 auto; /* Center the image within the frame */
 }
 
-#home, #sch, #rt, #pr, #pgm, #cts, #reg2 {
-    display: none;
-}
