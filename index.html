@@ -82,7 +82,6 @@
         reg.addEventListener("click", async (event) => {
             // Prevent the default form submission behavior
             event.preventDefault();
-            window.location.href = 'https://carrion626.github.io/home.html';
 
             // Get input values
             let name = document.getElementById("name").value;
@@ -104,29 +103,29 @@
             };
             
 
-            // try {
-            //     // Make an HTTP POST request to your server
-            //     let response = await fetch('http://localhost:3000/submit_registration', {
-            //         method: 'POST',
-            //         headers: {
-            //             'Content-Type': 'application/json',
-            //         },
-            //         body: JSON.stringify(data),
-            //     });
+            try {
+                // Make an HTTP POST request to your server
+                let response = await fetch('http://localhost:3000/submit_registration', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                });
 
-            //     if (response.ok) {
-            //         // Server successfully processed the request
-            //         let responseData = await response.json();
-            //         console.log(responseData);
+                if (response.ok) {
+                    // Server successfully processed the request
+                    let responseData = await response.json();
+                    console.log(responseData);
 
-            //         // Redirect or perform other actions based on the response
-            //         window.location.href = 'https://carrion626.github.io/home.html';
-            //     } else {
-            //         console.error('Server returned an error:', response.status);
-            //     }
-            // } catch (error) {
-            //     console.error('Error:', error);
-            // }
+                    // Redirect or perform other actions based on the response
+                    window.location.href = 'https://carrion626.github.io/home.html';
+                } else {
+                    console.error('Server returned an error:', response.status);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
         });
 
     </script>
