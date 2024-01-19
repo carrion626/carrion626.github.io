@@ -11,7 +11,10 @@
 
     <div id="preview">
         <img id="image" src="images/huyatina.jpg" style="display: block; max-width: calc(100vw - 40px); max-height: calc(100vh - 40px); margin: auto; padding: 20px;">
-        <button id="next">Next -></button>
+        <button id="next" style="position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);">Next -></button>
     </div>
 
 
@@ -55,18 +58,16 @@
                 // Set the 'src' attribute to the next image
                 image.src = 'images/' + images[currentIndex];
             }
-            // Hide the keyboard
+            
+            document.body.addEventListener('click', (event) => {
+            // Blur the active element to hide the keyboard
             document.activeElement.blur();
+        });
         });
     </script>
 
     <script>
         let reg = document.getElementById("register");
-
-        document.body.addEventListener('click', (event) => {
-            // Blur the active element to hide the keyboard
-            document.activeElement.blur();
-        });
     
         reg.addEventListener("click", async (event) => {
             // Prevent the default form submission behavior
