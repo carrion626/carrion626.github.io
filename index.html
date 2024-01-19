@@ -55,6 +55,8 @@
                 // Set the 'src' attribute to the next image
                 image.src = 'images/' + images[currentIndex];
             }
+            // Hide the keyboard
+            document.activeElement.blur();
         });
     </script>
 
