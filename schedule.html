@@ -8,14 +8,22 @@
     <meta name="format-detection" content="telephone=no">
     <title>Main page</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <!-- Include scripts using CDN links -->
+   <!-- Hammer.js -->
     <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8/hammer.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.js"></script>
+
+    <!-- Medium Zoom -->
+    <script src="node_modules/medium-zoom/dist/medium-zoom.js"></script>
 
 
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const zoomableImages = document.querySelectorAll('.zoomable-image');
+            mediumZoom(zoomableImages);
+        });
+    </script>
 
     <div id="sch">
         <div class="image-frame">
@@ -35,25 +43,6 @@
         back.addEventListener("click", async (event) => {
             window.location.href = "https://carrion626.github.io/home.html";
         })
-    </script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-        const zoomableImages = document.querySelectorAll('.zoomable-image');
-        const zoom = mediumZoom(zoomableImages);
-    
-        // Initialize Hammer.js
-        const hammer = new Hammer(document.body);
-    
-        // Add pinch gesture recognition
-        hammer.get('pinch').set({ enable: true });
-    
-        // Handle pinch events
-        hammer.on('pinch', function (event) {
-            // Adjust the zoom level based on the pinch scale
-            zoom.zoom(event.scale);
-        });
-        });
     </script>
   
 
