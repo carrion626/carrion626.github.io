@@ -54,27 +54,7 @@ button:hover {
     background: #2980b9;
 }
 
-img {
-    max-width: 70%;
-    height: auto;
-}
 
-.image-frame {
-    max-width: 70%;
-    max-height: 20%;
-    margin: 0 auto; /* Center the frame on the page */
-    border: 3px solid #dcd8d8;
-    padding: 1px;
-    border-radius: 8px;
-    overflow: auto; /* Allow scrolling within the frame */
-}
-
-.image-frame img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 0 auto; /* Center the image within the frame */
-}
 
 .zoomable-image {
     width: 100%; /* Occupy the full width of the container */
