@@ -8,16 +8,13 @@
     <meta name="format-detection" content="telephone=no">
     <title>Main page</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-   <!-- Hammer.js -->
-    <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8/hammer.min.js"></script>
-
-    <!-- Medium Zoom -->
-    <script src="node_modules/medium-zoom/dist/medium-zoom.js"></script>
-
-
     <link rel="stylesheet" href="style.css">
+    
 </head>
 <body>
+    <script src="https://unpkg.com/medium-zoom"></script>
+
+    <!-- Initialize medium-zoom on the zoomable image -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const zoomableImages = document.querySelectorAll('.zoomable-image');
