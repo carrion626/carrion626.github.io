@@ -102,13 +102,12 @@
                 name: name,
                 last_name: last_name,
                 email: email,
-                tel: tel,
+                tel: tel
             };
             
-
             try {
                 // Make an HTTP POST request to your server
-                let response = await fetch('https://2ca6-2a02-ff0-220-b795-a5cd-1a89-ee45-8ac5.ngrok-free.app/submit_registration', {
+                let response = await fetch('https://1d1b-2a02-ff0-220-b795-8177-4155-44d-6de2.ngrok-free.app/submit_registration', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -119,10 +118,11 @@
                     // Server successfully processed the request
                     let responseData = await response.json();
                     console.log(responseData);
+
+                    // Redirect or perform other actions based on the response
                     tg.showAlert("Registration successful!", () => {
                     // Callback function after the alert is closed
                     // Redirect to the home page
-
                     window.location.href = 'https://carrion626.github.io/home.html';
                 });
                 } else {
