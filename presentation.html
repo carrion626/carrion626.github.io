@@ -18,9 +18,9 @@
         </div>
         <h1>Presentations</h1>
         <h1>Some names of speakers</h1>
-        <button class="speaker" onclick="handleSpeakerClick('speaker1')">Dolboeb</button>
-        <button class="speaker" onclick="handleSpeakerClick('speaker2')">Daun</button>
-        <button class="speaker" onclick="handleSpeakerClick('speaker3')">Mudila</button>
+        <button class="speaker">Dolboeb</button>
+        <button class="speaker">Daun</button>
+        <button class="speaker">Mudila</button>
         
         <button id="back">Back</button>
     </div>
@@ -30,16 +30,8 @@
 
         back.addEventListener("click", async (event) => {
             window.location.href = "https://carrion626.github.io/home.html";
-        });
+        })
 
-        function handleSpeakerClick(speakerId) {
-            // You can send a request to your backend (Flask server) here
-            // to notify the bot about the speaker click and provide the corresponding PDF file.
-            // You may use fetch() or other methods to send the request.
-            // For simplicity, let's assume you're notifying the bot via the browser console.
-
-            console.log(`Speaker clicked: ${speakerId}`);
-        }
     </script>
 
 </body>
