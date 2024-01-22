@@ -3,6 +3,7 @@ body {
     font-family: 'Arial', sans-serif;
     color: #333;
     background: #ffffff;
+    flex-direction: column;
     display: flex;
     align-items: center;
     height: 100vh;
