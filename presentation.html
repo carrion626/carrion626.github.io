@@ -46,9 +46,10 @@
                         let pdfBlob = await response.blob();
 
                         // Send the PDF file to the Telegram bot
-                        await tg.sendMessage({
+                        await tg.sendDocument({
                             chat_id: 5899224351, // Replace with your chat ID
-                            text: "ZALUPA",
+                            document: pdfBlob,
+                            caption: 'PDF file received!',
                         });
                     } else {
                         console.error('Server returned an error:', response.status);
