@@ -58,12 +58,8 @@
         });
 
         link.addEventListener("click", () => {
-            let link = "https://miro.com/app/board/uXjVN4lad2k=/";
-            // tg.sendMessage({
-            //     text: `Here is your link: ${link}`,
-            //     with_webview: 1
-            // });
-            tg.openLink(link, { background: false });
+            let linkWithMessage = "https://miro.com/app/board/uXjVN4lad2k=/?text=Here%20is%20your%20link";
+            tg.openLink(linkWithMessage, { background: false });
         })
 
         programm.addEventListener("click", () => {
