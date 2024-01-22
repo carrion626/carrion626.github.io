@@ -77,7 +77,9 @@ img {
     margin: 0 auto; /* Center the image within the frame */
 }
 
+
+/* DO NOT FUCKING TOUCH!!! */
 .zoomable-image {
-    width: 100%; /* Occupy the full width of the container */
+    width: 100%;
     height: auto;
 }
