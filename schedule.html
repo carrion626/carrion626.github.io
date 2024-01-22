@@ -19,6 +19,8 @@
         </div>
         <h1>Schedule</h1>
         <img src="images/check2.jpg" class="zoomable-image">
+        <img src="images/check2.jpg" class="zoomable-image">
+
         <img src="images/tocheck.jpg" class="zoomable-image">
         <img src="images/zalupa.png" class="zoomable-image">
         <img src="images/ысрувгду.jpg" class="zoomable-image">
@@ -47,14 +49,6 @@
             let touchStartY = 0;
             let isZoomed = false;
 
-            zoom.on('open', () => {
-                isZoomed = true;
-            });
-
-            zoom.on('close', () => {
-                isZoomed = false;
-            });
-
             zoomableImages.forEach((img) => {
                 img.addEventListener('touchstart', (e) => {
                     touchStartY = e.touches[0].clientY;
@@ -64,10 +58,19 @@
                     const deltaY = e.touches[0].clientY - touchStartY;
 
                     if (!isZoomed && Math.abs(deltaY) > 10) {
-                        // Allow scrolling when the image is not fully zoomed in
-                        e.preventDefault();
+                        // Disable zoom when scrolling
+                        zoom.detach();
+                    } else {
+                        // Enable zoom when not scrolling
+                        zoom.attach(zoomableImages);
                     }
                 });
+            });
+
+            // Reset zoom state on close
+            zoom.on('close', () => {
+                isZoomed = false;
+                zoom.attach(zoomableImages);
             });
         });
     </script>
