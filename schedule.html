@@ -19,8 +19,6 @@
         </div>
         <h1>Schedule</h1>
         <img src="images/check2.jpg" class="zoomable-image">
-        <img src="images/check2.jpg" class="zoomable-image">
-
         <img src="images/tocheck.jpg" class="zoomable-image">
         <img src="images/zalupa.png" class="zoomable-image">
         <img src="images/ысрувгду.jpg" class="zoomable-image">
@@ -28,50 +26,19 @@
         <button id="back">Back</button>
     </div>
 
-    <script src="https://unpkg.com/medium-zoom"></script>
+    <script>
+        let back = document.getElementById("back");
+        back.addEventListener("click", async (event) => {
+            window.location.href = "https://carrion626.github.io/home.html";
+        })
+    </script>
 
+
+    <!-- Initialize medium-zoom on your zoomable images -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const zoomableImages = document.querySelectorAll('.zoomable-image');
-            const back = document.getElementById("back");
-
-            // Initialize medium-zoom on your zoomable images
-            const zoom = mediumZoom(zoomableImages, {
-                margin: 0,
-            });
-
-            // Handle back button click
-            back.addEventListener("click", async (event) => {
-                window.location.href = "https://carrion626.github.io/home.html";
-            });
-
-            // Allow both zooming and scrolling on touch devices
-            let touchStartY = 0;
-            let isZoomed = false;
-
-            zoomableImages.forEach((img) => {
-                img.addEventListener('touchstart', (e) => {
-                    touchStartY = e.touches[0].clientY;
-                });
-
-                img.addEventListener('touchmove', (e) => {
-                    const deltaY = e.touches[0].clientY - touchStartY;
-
-                    if (!isZoomed && Math.abs(deltaY) > 10) {
-                        // Disable zoom when scrolling
-                        zoom.detach();
-                    } else {
-                        // Enable zoom when not scrolling
-                        zoom.attach(zoomableImages);
-                    }
-                });
-            });
-
-            // Reset zoom state on close
-            zoom.on('close', () => {
-                isZoomed = false;
-                zoom.attach(zoomableImages);
-            });
+            mediumZoom(zoomableImages);
         });
     </script>
 
