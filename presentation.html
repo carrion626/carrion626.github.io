@@ -27,22 +27,11 @@
 
     <script>
         let back = document.getElementById("back");
-        let speakers = document.querySelectorAll(".speaker");
+        let speaker = document.getElementById("back");
         let tg = window.Telegram.WebApp;
 
         back.addEventListener("click", async (event) => {
             window.location.href = "https://carrion626.github.io/home.html";
-        });
-
-        speakers.forEach(speaker => {
-            speaker.addEventListener("click", async () => {
-                let pdfFile = speaker.getAttribute("data-pdf");
-                tg.sendMessage({
-                    text: `Sending PDF file: ${pdfFile}`,
-                    with_webview: 1,
-                    pdf_path: pdfFile
-                });
-            });
         });
     </script>
 
