@@ -15,7 +15,7 @@
 
     <div id="sch">
         <div class="image-frame">
-            <img src="images/33212.jpg" alt="Huyatina Image">
+            <img src="images/logo.jpg" alt="Huyatina Image">
         </div>
         <h1>Schedule</h1>
         <img src="images/check2.jpg" class="zoomable-image">
@@ -26,20 +26,49 @@
         <button id="back">Back</button>
     </div>
 
-    <script>
-        let back = document.getElementById("back");
-        back.addEventListener("click", async (event) => {
-            window.location.href = "https://carrion626.github.io/home.html";
-        })
-    </script>
-
     <script src="https://unpkg.com/medium-zoom"></script>
 
-    <!-- Initialize medium-zoom on your zoomable images -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const zoomableImages = document.querySelectorAll('.zoomable-image');
-            mediumZoom(zoomableImages);
+            const back = document.getElementById("back");
+            
+            // Initialize medium-zoom on your zoomable images
+            const zoom = mediumZoom(zoomableImages);
+
+            // Handle touch events to allow scrolling when image is not zoomed
+            let isZoomed = false;
+            let touchStartY = 0;
+
+            zoom.on('open', () => {
+                isZoomed = true;
+            });
+
+            zoom.on('close', () => {
+                isZoomed = false;
+            });
+
+            window.addEventListener('touchstart', (e) => {
+                if (isZoomed) {
+                    touchStartY = e.touches[0].clientY;
+                }
+            });
+
+            window.addEventListener('touchmove', (e) => {
+                if (isZoomed) {
+                    const deltaY = e.touches[0].clientY - touchStartY;
+
+                    // Allow scrolling only when the image is not fully zoomed in
+                    if (deltaY > 0 && zoom.getZoomLevel() === 1) {
+                        e.preventDefault();
+                    }
+                }
+            });
+
+            // Handle back button click
+            back.addEventListener("click", async (event) => {
+                window.location.href = "https://carrion626.github.io/home.html";
+            });
         });
     </script>
 
