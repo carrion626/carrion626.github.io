@@ -38,10 +38,11 @@
             speaker.addEventListener("click", async (event) => {
                 try {
                     // Make an HTTP GET request to your server to get the PDF file
-                    let response = await fetch(`https://1d1b-2a02-ff0-220-b795-8177-4155-44d-6de2.ngrok-free.app/pdf`);
+                    let response = await fetch(`https://1d1b-2a02-ff0-220-b795-8177-4155-44d-6de2.ngrok-free.app/pdf?filename=${pdfFileName}`);
 
                     if (response.ok) {
                         // Convert the response to a blob, which represents the PDF file
+                        let pdfBlob = await response.blob();
 
                         // Display an alert message
                         tg.showAlert("PDF file received!", () => {
