@@ -39,23 +39,16 @@
                 try {
                     let pdfFileName = speaker.getAttribute("data-pdf");
 
-                    // Make an HTTP GET request to your server to get the PDF file
+                    // Make an HTTP GET request to your Flask server to handle the PDF file
                     let response = await fetch(`https://b237-2a02-ff0-220-b795-a5cd-1a89-ee45-8ac5.ngrok-free.app/pdf?filename=${encodeURIComponent(pdfFileName)}`);
 
                     if (response.ok) {
-                        let pdfBlob = await response.blob();
-
-                        // Send the PDF file to the Telegram bot
-                        await tg.sendDocument({
-                            chat_id: 5899224351, // Replace with your chat ID
-                            document: pdfBlob,
-                            caption: 'PDF file received!',
-                        });
+                        console.log('PDF request successful:', response);
                     } else {
                         console.error('Server returned an error:', response.status);
                     }
                 } catch (error) {
-                    console.error('Error:', error);
+                    console.error('Error handling PDF request:', error);
                 }
             });
         });
