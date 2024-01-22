@@ -80,5 +80,4 @@ img {
 .zoomable-image {
     width: 100%; /* Occupy the full width of the container */
     height: auto;
-    touch-action: pinch-zoom;
 }
