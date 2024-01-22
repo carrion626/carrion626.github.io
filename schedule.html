@@ -43,9 +43,9 @@
                 window.location.href = "https://carrion626.github.io/home.html";
             });
 
-            // Allow scrolling when the image is not fully zoomed
+            // Allow both zooming and scrolling on touch devices
+            let touchStartY = 0;
             let isZoomed = false;
-            let startY = 0;
 
             zoom.on('open', () => {
                 isZoomed = true;
@@ -55,19 +55,19 @@
                 isZoomed = false;
             });
 
-            window.addEventListener('touchstart', (e) => {
-                startY = e.touches[0].clientY;
-            });
+            zoomableImages.forEach((img) => {
+                img.addEventListener('touchstart', (e) => {
+                    touchStartY = e.touches[0].clientY;
+                });
 
-            window.addEventListener('touchmove', (e) => {
-                if (!isZoomed) {
-                    const deltaY = e.touches[0].clientY - startY;
+                img.addEventListener('touchmove', (e) => {
+                    const deltaY = e.touches[0].clientY - touchStartY;
 
-                    // Allow scrolling only when the image is not fully zoomed in
-                    if (deltaY > 0 && zoom.getZoomLevel() === 1) {
+                    if (!isZoomed && Math.abs(deltaY) > 10) {
+                        // Allow scrolling when the image is not fully zoomed in
                         e.preventDefault();
                     }
-                }
+                });
             });
         });
     </script>
