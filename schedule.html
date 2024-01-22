@@ -32,13 +32,20 @@
         document.addEventListener('DOMContentLoaded', function () {
             const zoomableImages = document.querySelectorAll('.zoomable-image');
             const back = document.getElementById("back");
-            
-            // Initialize medium-zoom on your zoomable images
-            const zoom = mediumZoom(zoomableImages);
 
-            // Handle touch events to allow scrolling when image is not zoomed
+            // Initialize medium-zoom on your zoomable images
+            const zoom = mediumZoom(zoomableImages, {
+                margin: 0,
+            });
+
+            // Handle back button click
+            back.addEventListener("click", async (event) => {
+                window.location.href = "https://carrion626.github.io/home.html";
+            });
+
+            // Allow scrolling when the image is not fully zoomed
             let isZoomed = false;
-            let touchStartY = 0;
+            let startY = 0;
 
             zoom.on('open', () => {
                 isZoomed = true;
@@ -49,25 +56,18 @@
             });
 
             window.addEventListener('touchstart', (e) => {
-                if (isZoomed) {
-                    touchStartY = e.touches[0].clientY;
-                }
+                startY = e.touches[0].clientY;
             });
 
             window.addEventListener('touchmove', (e) => {
-                if (isZoomed) {
-                    const deltaY = e.touches[0].clientY - touchStartY;
+                if (!isZoomed) {
+                    const deltaY = e.touches[0].clientY - startY;
 
                     // Allow scrolling only when the image is not fully zoomed in
                     if (deltaY > 0 && zoom.getZoomLevel() === 1) {
                         e.preventDefault();
                     }
                 }
-            });
-
-            // Handle back button click
-            back.addEventListener("click", async (event) => {
-                window.location.href = "https://carrion626.github.io/home.html";
             });
         });
     </script>
