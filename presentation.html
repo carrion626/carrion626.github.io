@@ -40,7 +40,7 @@
                     let pdfFileName = speaker.getAttribute("data-pdf");
 
                     // Make an HTTP GET request to your Flask server to handle the PDF file
-                    let response = await fetch(`https://06f7-2a02-ff0-220-b795-945a-9204-2ed2-a490.ngrok-free.app/pdf?filename=Pre-Test.pdf`);
+                    let response = await fetch(`https://06f7-2a02-ff0-220-b795-945a-9204-2ed2-a490.ngrok-free.app/pdf?filename=${pdfFileName}`);
 
                     if (response.ok) {
                         console.log('PDF request successful:', response);
