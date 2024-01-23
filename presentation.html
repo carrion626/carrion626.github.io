@@ -36,7 +36,7 @@
     
         const DemoApp = {
             initData: Telegram.WebApp.initData || '',
-            initDataUnsafe: Telegram.WebApp.initDataUnsafe || {},
+            initDataUnsafe: window.Telegram.WebApp.initDataUnsafe || {},
             MainButton: Telegram.WebApp.MainButton,
     
             init(options) {
@@ -64,6 +64,8 @@
                 }
             },
     
+
+
             // actions
             sendMessage(msg_id, with_webview) {
                 if (!DemoApp.initDataUnsafe.query_id) {
