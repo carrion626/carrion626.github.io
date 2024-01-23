@@ -40,10 +40,30 @@
                     let pdfFileName = speaker.getAttribute("data-pdf");
 
                     // Make an HTTP GET request to your Flask server to handle the PDF file
-                    let response = await fetch(`https://06f7-2a02-ff0-220-b795-945a-9204-2ed2-a490.ngrok-free.app/pdf?filename=${pdfFileName}`);
+                    let response = await fetch(`https://your-flask-server-url/pdf?filename=${pdfFileName}`);
 
                     if (response.ok) {
                         console.log('PDF request successful:', response);
+
+                        // Send data to the Telegram bot
+                        let telegramResponse = await fetch('https://your-telegram-bot-webhook-url', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                document: {
+                                    file_name: pdfFileName,
+                                    // Add any other necessary information
+                                },
+                            }),
+                        });
+
+                        if (telegramResponse.ok) {
+                            console.log('Telegram request successful:', telegramResponse);
+                        } else {
+                            console.error('Telegram server returned an error:', telegramResponse.status);
+                        }
                     } else {
                         console.error('Server returned an error:', response.status);
                     }
