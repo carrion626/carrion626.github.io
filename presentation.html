@@ -40,8 +40,12 @@
 
                     let pdfFileName = speaker.getAttribute("data-pdf");
 
-                        tg.sendData(JSON.stringify(data))
-                        console.log('PDF request successful:', response);
+                    let data = {
+                        file: pdfFileName,
+                    }
+
+                    tg.sendData(JSON.stringify(data))
+                    console.log('PDF request successful:', response);
             })})
 
 
