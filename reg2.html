@@ -31,20 +31,6 @@
         </form>
     </div>
 
-
-    <script>     
-        let tg = window.Telegram.WebApp;
-        tg.expand()
-        tg.ready()
-
-        document.body.addEventListener('click', (event) => {
-            const clickedElement = event.target;
-            if (clickedElement.tagName !== 'INPUT' && clickedElement !== registerButton) {
-                document.activeElement.blur();
-            }
-        });
-    </script>
-
     <script>
         const registerButton = document.getElementById('register');
 
@@ -88,6 +74,7 @@
                     },
                     body: JSON.stringify(data),
                 });
+
                 if (response.ok) {
                     // Server successfully processed the request
                     let responseData = await response.json();
@@ -95,7 +82,6 @@
                     tg.showAlert("Registration successful!", () => {
                     // Callback function after the alert is closed
                     // Redirect to the home page
-
                     window.location.href = 'https://carrion626.github.io/home.html';
                 });
                 } else {
@@ -103,6 +89,14 @@
                 }
             } catch (error) {
                 console.error('Error:', error);
+            }
+        });
+        
+        document.body.addEventListener('click', (event) => {
+            const clickedElement = event.target;
+
+            if (clickedElement.tagName !== 'INPUT' && clickedElement !== registerButton) {
+                document.activeElement.blur();
             }
         });
 
