@@ -31,6 +31,20 @@
         </form>
     </div>
 
+
+    <script>     
+        let tg = window.Telegram.WebApp;
+        tg.expand()
+        tg.ready()
+
+        document.body.addEventListener('click', (event) => {
+            const clickedElement = event.target;
+            if (clickedElement.tagName !== 'INPUT' && clickedElement !== registerButton) {
+                document.activeElement.blur();
+            }
+        });
+    </script>
+
     <script>
         const registerButton = document.getElementById('register');
 
@@ -89,14 +103,6 @@
                 }
             } catch (error) {
                 console.error('Error:', error);
-            }
-        });
-        
-        document.body.addEventListener('click', (event) => {
-            const clickedElement = event.target;
-
-            if (clickedElement.tagName !== 'INPUT' && clickedElement !== registerButton) {
-                document.activeElement.blur();
             }
         });
 
