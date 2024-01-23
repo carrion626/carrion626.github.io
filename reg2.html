@@ -74,7 +74,6 @@
                     },
                     body: JSON.stringify(data),
                 });
-
                 if (response.ok) {
                     // Server successfully processed the request
                     let responseData = await response.json();
@@ -82,6 +81,7 @@
                     tg.showAlert("Registration successful!", () => {
                     // Callback function after the alert is closed
                     // Redirect to the home page
+
                     window.location.href = 'https://carrion626.github.io/home.html';
                 });
                 } else {
