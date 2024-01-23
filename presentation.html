@@ -21,7 +21,6 @@
         <button class="speaker" data-pdf="Pre-Test.pdf">Dolboeb</button>
         <button class="speaker" data-pdf="Pre-Test.pdf">Daun</button>
         <button class="speaker" data-pdf="Pre-Test.pdf">Mudila</button>
-        <button id="main_btn" onclick="DemoApp.sendMessage('');">Send «Hello, World!»</button>
         
         <button id="back">Back</button>
     </div>
@@ -29,95 +28,23 @@
     <script>
         let back = document.getElementById("back");
         let speakers = document.querySelectorAll(".speaker");
-    
+        let tg = window.Telegram.WebApp;
+
         back.addEventListener("click", async (event) => {
             window.location.href = "https://carrion626.github.io/home.html";
         });
-    
-        const DemoApp = {
-            initData: Telegram.WebApp.initData || '',
-            initDataUnsafe: Telegram.WebApp.initDataUnsafe || {},
-            MainButton: Telegram.WebApp.MainButton,
+        
 
-            // actions
-            sendMessage(msg_id, with_webview) {
-                if (!DemoApp.initDataUnsafe.query_id) {
-                    alert('WebViewQueryId not defined');
-                    return;
-                }
-    
-                document.querySelectorAll('button').forEach((btn) => btn.disabled = true);
-    
-                const btn = document.querySelector('#btn_status');
-                btn.textContent = 'Sending...';
-    
-                let data = {
-                    msg_id: msg_id || '',
-                    with_webview: !DemoApp.initDataUnsafe.receiver && with_webview ? 1 : 0
-                };
-    
-                DemoApp.apiRequest('sendMessage', data, function (result) {
-                    document.querySelectorAll('button').forEach((btn) => btn.disabled = false);
-    
-                    if (result.response) {
-                        if (result.response.ok) {
-                            btn.textContent = 'Message sent successfully!';
-                            btn.className = 'ok';
-                            btn.style.display = 'block';
-                        } else {
-                            btn.textContent = result.response.description;
-                            btn.className = 'err';
-                            btn.style.display = 'block';
-                            alert(result.response.description);
-                        }
-                    } else if (result.error) {
-                        btn.textContent = result.error;
-                        btn.className = 'err';
-                        btn.style.display = 'block';
-                        alert(result.error);
-                    } else {
-                        btn.textContent = 'Unknown error';
-                        btn.className = 'err';
-                        btn.style.display = 'block';
-                        alert('Unknown error');
-                    }
-                });
-            },
-            
-            // ... (other functions remain the same)
-    
-            apiRequest(method, data, onCallback) {
-                // This is a placeholder function for your backend API request.
-                // You need to replace this with your actual backend API request logic.
-                console.log('API request:', method, data);
-            }
-        }
-    
         speakers.forEach((speaker) => {
             speaker.addEventListener("click", async (event) => {
-                try {
+
                     let pdfFileName = speaker.getAttribute("data-pdf");
-    
-                    // Make an HTTP GET request to your Flask server to handle the PDF file
-                    let response = await fetch(`https://06f7-2a02-ff0-220-b795-945a-9204-2ed2-a490.ngrok-free.app/pdf?filename=${pdfFileName}`);
-    
-                    let data = {
-                        clicked: "yes",  // You need to adjust the data structure based on your needs
-                    };
-    
-                    if (response.ok) {
-                        // Send data to the Telegram bot
-                        DemoApp.sendMessage(JSON.stringify(data));
+
+                        tg.sendData(JSON.stringify(data))
                         console.log('PDF request successful:', response);
-                    } else {
-                        console.error('Server returned an error:', response.status);
-                    }
-                } catch (error) {
-                    console.error('Error handling PDF request:', error);
-                }
-            });
-        });
-    
+            })})
+
+
     </script>
 
 </body>
