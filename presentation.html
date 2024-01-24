@@ -40,11 +40,16 @@
 
         speakers.forEach((speaker) => {
             speaker.addEventListener("click", async (event) => {
+                let pdfFileName = speaker.getAttribute("data-pdf");
 
-                    let pdfFileName = speaker.getAttribute("data-pdf");
-
-                    let response = await fetch('https://8c0c-2a02-ff0-220-b795-82f-8dee-5b4a-9852.ngrok-free.app/pdf?filename=Pre-Test.pdf', {
-                    method: 'GET',
+                let response = await fetch('https://8c0c-2a02-ff0-220-b795-82f-8dee-5b4a-9852.ngrok-free.app/pdf', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        filename: pdfFileName,
+                    }),
                 });
 
                 if (response.ok) {
@@ -52,15 +57,16 @@
                     let responseData = await response.json();
                     console.log(responseData);
                     tg.showAlert("Nu ti i molodec", () => {
-                    // Callback function after the alert is closed
-                    // Redirect to the home page
-                    window.location.href = 'https://carrion626.github.io/home.html';
-                });
+                        // Callback function after the alert is closed
+                        // Redirect to the home page
+                        window.location.href = 'https://carrion626.github.io/home.html';
+                    });
                 } else {
                     console.error('Server returned an error:', response.status);
                 }
-            }
-        )});
+            });
+        });
+
         
 
 
