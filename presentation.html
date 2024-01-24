@@ -56,10 +56,10 @@
                     // Server successfully processed the request
                     let responseData = await response.json();
                     console.log(responseData);
-                    await tg.showAlert("IDI NAHUI OK?", () => {
+                    tg.showAlert("IDI NAHUI OK?", () => {
 
-                        window.location.href = 'https://carrion626.github.io/home.html';
-                    });
+                    window.location.href = 'https://carrion626.github.io/home.html';
+                });
                 } else {
                     console.error('Server returned an error:', response.status);
                 }
