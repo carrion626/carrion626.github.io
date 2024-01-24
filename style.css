@@ -1,35 +1,11 @@
 
 body {
-    font-family: 'Arial', sans-serif;
-    color: #333;
-    background: #ffffff;
-    flex-direction: column;
-    
-    display: flex;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    padding: 10px;
+    text-align: center;
 }
 
-h1 {
-    color: #000000;
-    margin-bottom: 20px;  
-    align-items: center;  
-}
-
-form {
-    max-width: 400px;
-    width: 80%;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    background: #695f5f;
-    box-sizing: border-box;
-}
 
 input {
-    width: 70%;
+    width: 90%;
     padding: 10px;
     margin-bottom: 15px;
     box-sizing: border-box;
@@ -40,9 +16,9 @@ input {
 }
 
 button {
-    width: 70%;
+    width: 90%;
     padding: 10px;
-    margin: 3px;
+    margin: 5px;
     background: #3498db;
     color: #fff;
     border: none;
@@ -51,6 +27,7 @@ button {
     font-weight: 500;
     cursor: pointer;
 }
+
 
 button:hover {
     background: #2980b9;
@@ -63,12 +40,26 @@ button:hover {
 }
 
 img {
-    max-width: 100%;
+    max-width: 90%;
     height: auto;
+
+}
+
+#contectimg {
+    border: 2px solid #bdbcbc;
+    padding: 1px;
+    border-radius: 3px;
+}
+
+#imagefirst {
+    max-width: 95%;
+    height: auto;
+    margin: 0 auto; /* Center the frame on the page */
+
 }
 
 .image-frame {
-    max-width: 70%;
+    max-width: 90%;
     max-height: 10%;
     margin: 0 auto; /* Center the frame on the page */
     border: 3px solid #0f96a5;
@@ -78,7 +69,7 @@ img {
 }
 
 .image-frame img {
-    max-width: 100%;
+    max-width: 50%;
     height: auto;
     display: block;
     margin: 0 auto; /* Center the image within the frame */
