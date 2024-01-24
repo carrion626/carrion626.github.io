@@ -57,9 +57,18 @@
             window.location.href = "https://carrion626.github.io/presentation.html";
         });
 
-        link.addEventListener("click", () => {
+        link.addEventListener("click", async(event) => {
             let link = "https://miro.com/app/board/uXjVN4lad2k=/";
             tg.openLink(link);
+            let response = await fetch(`https://8c0c-2a02-ff0-220-b795-82f-8dee-5b4a-9852.ngrok-free.app/send_link`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        filename: pdfFileName,
+                    }),
+                });
         })
 
         programm.addEventListener("click", () => {
