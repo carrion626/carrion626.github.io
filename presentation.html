@@ -47,6 +47,9 @@
                     headers: {
                         'Content-Type': 'application/json',
                     },
+                    body: JSON.stringify({
+                        filename: pdfFileName,
+                    }),
                 });
 
                 if (response.ok) {
