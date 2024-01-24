@@ -56,9 +56,11 @@
                     // Server successfully processed the request
                     let responseData = await response.json();
                     console.log(responseData);
-                    tg.showConfirm("PDF was sent to a chat, do you want to close web app?", () => {
+                    setTimeout(() => {
+                        tg.showConfirm("PDF was sent to a chat, do you want to close web app?", () => {
 
-                        tg.close();
+                            tg.close();
+                        });
                     });
                 } else {
                     console.error('Server returned an error:', response.status);
