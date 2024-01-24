@@ -53,11 +53,11 @@
                 });
 
                 if (response.ok) {
-                    await new Promise(resolve => setTimeout(resolve, 2000));
+                    // await new Promise(resolve => setTimeout(resolve, 2000));
                     
                     tg.showConfirm("PDF was sent to a chat, do you want to close web app?", () => {
 
-                        tg.close();
+                        window.location.href = 'https://carrion626.github.io/home.html';
                     });
                 } else {
                     console.error('Server returned an error:', response.status);
