@@ -53,22 +53,21 @@
                 });
 
                 if (response.ok) {
-                // Server successfully processed the request
-                let responseData = await response.json();
-                console.log(responseData);
-                
-                // Use setTimeout to introduce a delay
-                setTimeout(() => {
+                    // Server successfully processed the request
+                    let responseData = await response.json();
+                    console.log(responseData);
+                    
                     tg.showConfirm("PDF was sent to a chat, do you want to close web app?", () => {
+
                         tg.close();
                     });
-                }, 2000); // 2000 milliseconds (2 seconds) delay
-            } else {
-                console.error('Server returned an error:', response.status);
-            }
+                } else {
+                    console.error('Server returned an error:', response.status);
+                }
+            });
         });
-    });
-</script>
+
+    </script>
 
 </body>
 </html>
