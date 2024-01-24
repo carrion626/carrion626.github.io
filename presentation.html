@@ -56,6 +56,8 @@
                     // Server successfully processed the request
                     let responseData = await response.json();
                     console.log(responseData);
+
+                    await new Promise(resolve => setTimeout(resolve, 2000));
                     
                     tg.showConfirm("PDF was sent to a chat, do you want to close web app?", () => {
 
