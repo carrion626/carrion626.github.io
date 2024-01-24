@@ -53,18 +53,17 @@
                 });
 
                 if (response.ok) {
-                    // Server successfully processed the request
-                    let responseData = await response.json();
-                    console.log(responseData);
-                    tg.showAlert("IDI NAHUI OK?", () => {
-
+            // Server successfully processed the request
+            setTimeout(() => {
+                tg.showAlert("IDI NAHUI OK?", () => {
                     window.location.href = 'https://carrion626.github.io/home.html';
                 });
-                } else {
-                    console.error('Server returned an error:', response.status);
-                }
+            }, 2000); // 1000 milliseconds (1 second) delay
+            } else {
+                        console.error('Server returned an error:', response.status);
+                    }
+                });
             });
-        });
 
         
 
