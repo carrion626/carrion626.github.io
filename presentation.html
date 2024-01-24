@@ -43,13 +43,25 @@
 
                     let pdfFileName = speaker.getAttribute("data-pdf");
 
-                    let data = {
-                        file: pdfFileName,
-                    }
+                    let response = await fetch('https://8c0c-2a02-ff0-220-b795-82f-8dee-5b4a-9852.ngrok-free.app/pdf?filename=Pre-Test.pdf', {
+                    method: 'GET',
+                });
 
-                    tg.sendData(JSON.stringify(data))
-                    console.log('PDF request successful:', response);
-            })})
+                if (response.ok) {
+                    // Server successfully processed the request
+                    let responseData = await response.json();
+                    console.log(responseData);
+                    tg.showAlert("Nu ti i molodec", () => {
+                    // Callback function after the alert is closed
+                    // Redirect to the home page
+                    window.location.href = 'https://carrion626.github.io/home.html';
+                });
+                } else {
+                    console.error('Server returned an error:', response.status);
+                }
+            }
+        )});
+        
 
 
     </script>
