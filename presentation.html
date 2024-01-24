@@ -55,9 +55,14 @@
                 if (response.ok) {
                     // await new Promise(resolve => setTimeout(resolve, 2000));
                     
-                    tg.showConfirm("PDF was sent to a chat, do you want to close web app?", () => {
-
-                        window.location.href = 'https://carrion626.github.io/home.html';
+                    tg.showConfirm("PDF was sent to a chat, do you want to close web app?", (confirmed) => {
+                        if (confirmed) {
+                            // User pressed 'OK'
+                            window.location.href = 'https://carrion626.github.io/home.html';
+                        } else {
+                            // User pressed 'Cancel'
+                            tg.close();
+                        }
                     });
                 } else {
                     console.error('Server returned an error:', response.status);
