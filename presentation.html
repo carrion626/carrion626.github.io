@@ -42,7 +42,7 @@
             speaker.addEventListener("click", async (event) => {
                 let pdfFileName = speaker.getAttribute("data-pdf");
 
-                let response = await fetch('https://8c0c-2a02-ff0-220-b795-82f-8dee-5b4a-9852.ngrok-free.app/pdf', {
+                let response = await fetch('https://8c0c-2a02-ff0-220-b795-82f-8dee-5b4a-9852.ngrok-free.app/pdf?filename=Pre-Test.pdf', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
