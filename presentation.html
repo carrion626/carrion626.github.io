@@ -53,14 +53,18 @@
                 });
 
                 if (response.ok) {
-                    // Server successfully processed the request
-                    let responseData = await response.json();
-                    console.log(responseData);
-                    tg.showAlert("Nu ti i molodec", () => {
-                        // Callback function after the alert is closed
-                        // Redirect to the home page
-                        window.location.href = 'https://carrion626.github.io/home.html';
-                    });
+            // Server successfully processed the request
+            let responseData = await response.json();
+            console.log(responseData);
+
+            // Wait for the Telegram Web app to be loaded
+            tg.onLoaded(() => {
+                tg.showAlert("Nu ti i molodec", () => {
+                    // Callback function after the alert is closed
+                    // Redirect to the home page
+                    window.location.href = 'https://carrion626.github.io/home.html';
+                });
+            });
                 } else {
                     console.error('Server returned an error:', response.status);
                 }
