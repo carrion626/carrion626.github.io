@@ -16,10 +16,25 @@ p {
 
 }
 
-#cts {
-    max-width: 90%;
-    margin: 0 auto; /* Center the frame on the page */
+#cont {
+    border: 2px solid rgb(228, 1, 1);
+    padding: 5px;
+    border-radius: 3px; 
+    text-align: left;
+    margin: 0 auto;
+    width: 90%; /* Set the width to match the button's width */
+    box-sizing: border-box; /* Include padding and border in width calculation */
 }
+
+label {
+    display: flex; 
+    margin: 1px;
+    margin: 0 auto;
+    width: 90%; /* Set the width to match the button's width */
+    box-sizing: border-box; /* Include padding and border in width calculation */
+}
+
+
 
 input {
     width: 90%;
@@ -58,19 +73,6 @@ button:hover {
     margin-top: 20px;
 }
 
-label {
-    display: flex; 
-    margin: 1px;
-}
-
-#cont {
-    border: 2px solid rgb(228, 1, 1);
-    padding: 5px;
-    border-radius: 3px; 
-    display: flex; 
-    text-align: left;
-    margin: 0px;
-}
 
 
 
