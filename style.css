@@ -43,6 +43,19 @@ button:hover {
     margin-top: 20px;
 }
 
+label {
+    display: flex; 
+    margin: 1px;
+}
+
+#cont {
+    border: 2px solid #000000;
+    padding: 5px;
+    border-radius: 3px; 
+    display: flex; 
+    text-align: left;
+    margin: 0px;
+}
 
 
 
