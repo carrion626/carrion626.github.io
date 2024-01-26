@@ -37,9 +37,14 @@ button:hover {
 
 .button-container {
     display: flex;
-    justify-content: space-between;
-    margin-top: 20px; /* Adjust as needed */
+    justify-content: space-around;
+    max-width: 90%;
+    margin: 0 auto;
+    margin-top: 20px;
 }
+
+
+
 
 img {
     max-width: 90%;
