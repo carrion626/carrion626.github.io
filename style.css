@@ -11,6 +11,9 @@ h1 {
 
 p {
     color: var(--tg-theme-hint-color);
+    max-width: 90%;
+    margin: 0 auto; /* Center the frame on the page */
+
 }
 
 input {
