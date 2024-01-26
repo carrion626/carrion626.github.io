@@ -16,6 +16,11 @@ p {
 
 }
 
+#cts {
+    max-width: 90%;
+    margin: 0 auto; /* Center the frame on the page */
+}
+
 input {
     width: 90%;
     padding: 10px;
