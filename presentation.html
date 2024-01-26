@@ -54,13 +54,20 @@
 
                 if (response.ok) {
                     // await new Promise(resolve => setTimeout(resolve, 2000));
-                    
-                    tg.showConfirm("PDF was sent to a chat, do you want to continue using web app?", (confirmed) => {
-                        if (confirmed) {
-                            // User pressed 'OK'
+
+                    tg.showPopup({
+                        title: 'PDF Sent',
+                        message: 'PDF was sent to a chat. Do you want to continue using the web app?',
+                        buttons: [
+                            { type: 'ok', text: 'Open' },
+                            { type: 'close', text: 'Close' },
+                        ],
+                    }, (buttonId) => {
+                        if (buttonId === 'ok') {
+                            // User pressed 'Open'
                             window.location.href = 'https://carrion626.github.io/home.html';
                         } else {
-                            // User pressed 'Cancel'
+                            // User pressed 'Close'
                             tg.close();
                         }
                     });
