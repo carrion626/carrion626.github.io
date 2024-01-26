@@ -59,11 +59,11 @@
                         title: 'PDF Sent',
                         message: 'PDF was sent to a chat. Do you want to continue using the web app?',
                         buttons: [
-                            { type: 'ok', text: 'Open' },
-                            { type: 'close', text: 'Close' },
+                            { type: 'default', text: 'YES' },
+                            { type: 'default', text: 'Not YES' },
                         ],
-                    }, (buttonId) => {
-                        if (buttonId === 'ok') {
+                    }, (buttonText) => {
+                        if (buttonText === 'Open') {
                             // User pressed 'Open'
                             window.location.href = 'https://carrion626.github.io/home.html';
                         } else {
