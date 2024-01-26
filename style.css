@@ -89,6 +89,7 @@ img {
     max-width: 90%;
     max-height: 80px;
     margin: 0 auto; /* Center the frame on the page */
+    margin-top: 40px;
     border: 1px solid #292929;
     padding: 0px;
     border-radius: 8px;
