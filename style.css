@@ -53,8 +53,8 @@ img {
 }
 
 #contectimg {
-    border: 2px solid #bdbcbc;
-    padding: 1px;
+    border: 1px solid #bdbcbc;
+    padding: 0px;
     border-radius: 3px;
 }
 
