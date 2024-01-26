@@ -5,6 +5,13 @@ body {
     background: var(--tg-theme-bg-color);
 }
 
+h1 {
+    color: var(--tg-theme-text-color);
+  }
+
+p {
+    color: var(--tg-theme-hint-color);
+}
 
 input {
     width: 90%;
@@ -49,7 +56,7 @@ label {
 }
 
 #cont {
-    border: 2px solid #000000;
+    border: 2px solid var(--tg-theme-text-color);
     padding: 5px;
     border-radius: 3px; 
     display: flex; 
