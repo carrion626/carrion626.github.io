@@ -17,7 +17,7 @@ p {
 }
 
 #cont {
-    border: 2px solid rgb(228, 1, 1);
+    border: 2px solid rgb(177, 173, 173);
     padding: 5px;
     border-radius: 3px; 
     text-align: left;
@@ -93,6 +93,17 @@ img {
     height: auto;
     margin: 0 auto; /* Center the frame on the page */
 
+}
+
+.main-image-frame {
+    max-width: 90%;
+    max-height: 10%;
+    margin: 0 auto; /* Center the frame on the page */
+    margin-top: 30px;
+    border: 1px solid #292929;
+    padding: 0px;
+    border-radius: 8px;
+    overflow: hidden
 }
 
 .image-frame {
