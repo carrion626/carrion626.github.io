@@ -29,7 +29,9 @@
     </div>
 
     <script>
-        Telegram.WebApp.BackButton.hide();
+        document.addEventListener('DOMContentLoaded', function() {
+            Telegram.WebApp.BackButton.hide();
+                })
         let back = document.getElementById("back");
         let speakers = document.querySelectorAll(".speaker");
         let tg = window.Telegram.WebApp;
