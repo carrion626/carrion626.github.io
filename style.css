@@ -87,17 +87,18 @@ img {
 
 .image-frame {
     max-width: 90%;
-    max-height: 10%;
+    max-height: 80px;
     margin: 0 auto; /* Center the frame on the page */
-    border: 3px solid #0f96a5;
-    padding: 1px;
+    border: 1px solid #292929;
+    padding: 0px;
     border-radius: 8px;
-    overflow: auto; /* Allow scrolling within the frame */
+    overflow: hidden
 }
 
 .image-frame img {
-    max-width: 50%;
-    height: auto;
+    max-width: 100%;
+    max-height: 10%;
+    height: max-content;
     display: block;
     margin: 0 auto; /* Center the image within the frame */
 }
