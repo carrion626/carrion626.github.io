@@ -31,13 +31,13 @@
         let tg = window.Telegram.WebApp;
 
         tg.ready()
-        const BackButton = window.Telegram.WebApp.BackButton;
-        BackButton.hide();
+        // const BackButton = window.Telegram.WebApp.BackButton;
+        // BackButton.hide();
 
-        BackButton.onClick(function() {
-            WebApp.showAlert("BackButton clicked");
-            BackButton.hide();
-        });
+        // BackButton.onClick(function() {
+        //     WebApp.showAlert("BackButton clicked");
+        //     BackButton.hide();
+        // });
 
         tg.expand(); //расширяем на все окно  
 
@@ -58,14 +58,14 @@
 
 
 
-        document.addEventListener('DOMContentLoaded', function() {
-            window.Telegram.WebApp.BackButton.hide();
-                })
+        // document.addEventListener('DOMContentLoaded', function() {
+        //     window.Telegram.WebApp.BackButton.hide();
+        //         })
         
 
-        back.addEventListener("click", async (event) => {
-            window.location.href = "https://carrion626.github.io/home.html";
-        });
+        // back.addEventListener("click", async (event) => {
+        //     window.location.href = "https://carrion626.github.io/home.html";
+        // });
         
 
         speakers.forEach((speaker) => {
