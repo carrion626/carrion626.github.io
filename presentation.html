@@ -26,12 +26,18 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            Telegram.WebApp.BackButton.hide();
-                })
         let back = document.getElementById("back");
         let speakers = document.querySelectorAll(".speaker");
         let tg = window.Telegram.WebApp;
+
+        tg.ready()
+        const BackButton = Telegram.WebApp.BackButton;
+        BackButton.hide();
+
+        document.addEventListener('DOMContentLoaded', function() {
+            Telegram.WebApp.BackButton.hide();
+                })
+        
 
         back.addEventListener("click", async (event) => {
             window.location.href = "https://carrion626.github.io/home.html";
