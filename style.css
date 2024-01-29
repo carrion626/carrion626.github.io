@@ -98,12 +98,27 @@ img {
     border-radius: 3px;
 }
 
-#imagefirst {
-    max-width: 95%;
-    height: auto;
-    margin: 0 auto; /* Center the frame on the page */
-
+#preview {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 85vh; /* 85% of the viewport height */
+    width: 95vw; /* 95% of the viewport width */
+    margin: 0 auto; /* Center the container horizontally */
+    border: 1px solid #bdbcbc;
+    padding: 0;
+    border-radius: 3px;
+    overflow: hidden; /* Ensure the image does not overflow the container */
 }
+
+#imagefirst {
+    max-width: 1000%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    margin: auto; /* Center the image both horizontally and vertically */
+}
+
 
 .main-image-frame {
     max-width: 90%;
