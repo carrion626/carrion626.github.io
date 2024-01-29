@@ -13,7 +13,7 @@
 <body>
 
     <div id="preview">
-        <img id="imagefirst" src="images/logo.jpg">
+        <img id="imagefirst" src="images/notlogo.jpg">
         <button id="next" style="position: fixed;
         bottom: 20px;
         left: 50%;
@@ -26,6 +26,7 @@
         <div class="main-image-frame">
             <img src="images/logo.jpg" alt="Huyatina Image">
         </div>
+        <br>
         <h1>Dentist Event</h1>
         <form method="POST">
             <!-- ADD "REQUIRED TO EVERY FIELD" -->
@@ -37,11 +38,13 @@
             <input type="text" id="school" placeholder="school" >
             <input type="text" id="position" placeholder="position">
             <button id="register">Register</button>
+            <br>
+            <br>
         </form>
     </div>
 
     <script>
-        const images = ['logo.jpg', 'check2.jpg', 'tocheck.jpg', 'ысрувгду.jpg', 'logo.jpg'];
+        const images = ['notlogo.jpg', 'check2.jpg', 'tocheck.jpg', 'ысрувгду.jpg', 'logo.jpg'];
         let currentIndex = 0;
         
 
@@ -49,7 +52,7 @@
         tg.expand()
         tg.ready()
 
-        const image = document.getElementById('image');
+        const image = document.getElementById('imagefirst');
         const previewDiv = document.getElementById('preview');
         const firstRegDiv = document.getElementById('first_reg');
         const nextButton = document.getElementById('next');
