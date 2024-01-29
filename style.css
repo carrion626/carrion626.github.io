@@ -120,8 +120,6 @@ img {
 
 .main-image-frame img {
     max-width: 100%;
-    max-height: 10%;
-    height: max-content;
     display: block;
     margin: 0 auto; /* Center the image within the frame */
 }
