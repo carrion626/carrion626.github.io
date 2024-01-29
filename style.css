@@ -109,18 +109,21 @@ img {
 
 .main-image-frame {
     max-width: 90%;
-    margin: 0 auto;
+    max-height: 10%;
+    margin: 0 auto; /* Center the frame on the page */
     margin-top: 30px;
     border: 1px solid #292929;
+    padding: 0px;
     border-radius: 6px;
-    overflow: hidden;
+    overflow: hidden
 }
 
 .main-image-frame img {
     max-width: 100%;
-    height: auto; /* Let the browser determine the correct height */
+    max-height: 10%;
+    height: max-content;
     display: block;
-    margin: 0 auto;
+    margin: 0 auto; /* Center the image within the frame */
 }
 
 .image-frame {

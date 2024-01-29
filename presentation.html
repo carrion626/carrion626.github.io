@@ -31,11 +31,16 @@
         let tg = window.Telegram.WebApp;
 
         tg.ready()
-        const BackButton = Telegram.WebApp.BackButton;
+        const BackButton = window.Telegram.WebApp.BackButton;
         BackButton.hide();
 
+        BackButton.onClick(function() {
+            WebApp.showAlert("BackButton clicked");
+            BackButton.hide();
+        });
+
         document.addEventListener('DOMContentLoaded', function() {
-            Telegram.WebApp.BackButton.hide();
+            window.Telegram.WebApp.BackButton.hide();
                 })
         
 
