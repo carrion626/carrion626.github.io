@@ -74,7 +74,7 @@ button:hover {
     margin-top: 20px;
 }
 
-#back {
+/* #back {
     position: fixed;
     bottom: 20px;
     left: 0;
@@ -83,17 +83,31 @@ button:hover {
     display: flex;
     justify-content: center;
     align-items: center;
+} */
+
+
+
+/* _____________CONTENT_________________  TODO: FIX */
+#contectimg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 10px;
+    border: 1px outset #bdbcbc;
+    padding-top: 66.67%; /* 2/3 aspect ratio */
+    position: relative;
+    overflow: hidden;
 }
 
-
-
-/* _____________CONTENT_________________ */
-#contectimg {
-    border: 1px solid #bdbcbc;
-    padding: 0px;
-    border-radius: 3px;
-    max-width: 90%;
-    height: auto;
+#contectimg img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 
@@ -143,7 +157,7 @@ button:hover {
     object-fit: cover;
 }
 
-/* ________HUI ZNAET___________ */
+/* ________SMALL IMG___________ */
 
 .image-frame {
     display: flex;
