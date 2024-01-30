@@ -90,24 +90,21 @@ button:hover {
 /* _____________CONTENT_________________  TODO: FIX */
 #contectimg {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column; /* Arrange items vertically */
+    align-items: center; /* Center items horizontally */
     width: 90%;
     margin: 0 auto;
     margin-top: 10px;
     border: 1px outset #bdbcbc;
-    padding-top: 66.67%; /* 2/3 aspect ratio */
     position: relative;
     overflow: hidden;
 }
 
 #contectimg img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    width: 100%; /* Take up full width of the container */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: cover; /* Cover the entire space */
+    margin-bottom: 10px; /* Adjust spacing between images */
 }
 
 
