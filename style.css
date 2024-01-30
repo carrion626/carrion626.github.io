@@ -102,8 +102,9 @@ img {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 85vh; /* 85% of the viewport height */
+    height: calc(95vw * 4 / 3); /* Calculate height based on the aspect ratio */
     width: 95vw; /* 95% of the viewport width */
+    max-height: 85vh; /* Set maximum height to 85% of the viewport height */
     margin: 0 auto; /* Center the container horizontally */
     border: 1px solid #bdbcbc;
     padding: 0;
@@ -112,11 +113,9 @@ img {
 }
 
 #imagefirst {
-    max-width: 1000%;
-    max-height: 100%;
-    width: auto;
-    height: auto;
-    margin: auto; /* Center the image both horizontally and vertically */
+    width: 100%; /* Set width to 100% of the container */
+    height: 100%; /* Set height to 100% of the container */
+    object-fit: cover; /* Ensure the image covers the container */
 }
 
 
