@@ -86,16 +86,13 @@ button:hover {
 }
 
 
-img {
-    max-width: 90%;
-    height: auto;
-
-}
 
 #contectimg {
     border: 1px solid #bdbcbc;
     padding: 0px;
     border-radius: 3px;
+    max-width: 90%;
+    height: auto;
 }
 
 #preview {
@@ -110,14 +107,20 @@ img {
     padding: 0;
     border-radius: 3px;
     overflow: hidden; /* Ensure the image does not overflow the container */
+    position: relative; /* Add relative positioning */
 }
 
 #imagefirst {
     width: 100%; /* Set width to 100% of the container */
-    height: 100%; /* Set height to 100% of the container */
-    object-fit: cover; /* Ensure the image covers the container */
+    height: auto; /* Set height to auto to maintain aspect ratio */
+    position: absolute; /* Position the image absolutely */
+    top: 50%; /* Align the top of the image to the middle of the container */
+    left: 50%; /* Align the left of the image to the middle of the container */
+    transform: translate(-50%, -50%); /* Translate the image back by 50% of its own width and height */
 }
 
+
+/* EEEEEEEEEEEEEEEEEEE NOT THIS ONE */
 
 .main-image-frame {
     max-width: 90%;
