@@ -8,6 +8,7 @@
     <meta name="format-detection" content="telephone=no">
     <title>Main page</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="custom.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -20,22 +21,11 @@
         <h1>Presentations of speakers</h1>
         <button class="speaker" data-pdf="Pre-Test.pdf">Dmytro Seleba</button>
         <button class="speaker" data-pdf="my_resume_n.pdf">Andrii Zabolotnyi</button>
-        <button class="speaker" data-pdf="Pre-Test.pdf">Oksana PrychepenskA</button>
-        
-        <!-- <button id="back">Back</button> -->
+        <button class="speaker" data-pdf="Pre-Test.pdf">Oksana PrychepenskA</button>        
     </div>
 
     <script>
-        let back = document.getElementById("back");
         let speakers = document.querySelectorAll(".speaker");
-        let tg = window.Telegram.WebApp;
-
-        tg.MainButton.text = "Back"; //изменяем текст кнопки 
-        tg.MainButton.show()
-        Telegram.WebApp.onEvent('mainButtonClicked', function(){
-            window.location.href = "https://carrion626.github.io/home.html";
-        });
-
 
         speakers.forEach((speaker) => {
             speaker.addEventListener("click", async (event) => {

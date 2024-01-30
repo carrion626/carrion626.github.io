@@ -28,13 +28,8 @@
             <input type="text" id="city" placeholder="City" >
             <input type="text" id="school" placeholder="school" >
             <input type="text" id="position" placeholder="position">
-            <button id="back">Back</button>
             <button id="register">Register</button>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
+
         </form>
     </div>
 
@@ -42,11 +37,6 @@
         const registerButton = document.getElementById('register');
 
         let reg = document.getElementById("register");
-        let back = document.getElementById("back");
-
-        back.addEventListener("click", async (event) => {
-            window.location.href = "https://carrion626.github.io/home.html";
-                })
     
         reg.addEventListener("click", async (event) => {
             // Prevent the default form submission behavior
