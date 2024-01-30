@@ -14,10 +14,7 @@
 
     <div id="preview">
         <img id="imagefirst" src="images/notlogo.jpg">
-        <button id="next" style="position: fixed;
-        bottom: 20px;
-        left: 50%;
-        transform: translateX(-50%);">Next -></button>
+
     </div>
 
 
@@ -55,10 +52,11 @@
         const image = document.getElementById('imagefirst');
         const previewDiv = document.getElementById('preview');
         const firstRegDiv = document.getElementById('first_reg');
-        const nextButton = document.getElementById('next');
+        tg.MainButton.text = "Back"; //изменяем текст кнопки 
+        tg.MainButton.show()
         const registerButton = document.getElementById('register');
 
-        nextButton.addEventListener('click', () => {
+        Telegram.WebApp.onEvent('mainButtonClicked', function(){
             // Update the index for the next image
             currentIndex = (currentIndex + 1) % images.length;
             
@@ -66,6 +64,7 @@
                 // If the end is reached, hide "preview" and show "first_reg"
                 previewDiv.style.display = 'none';
                 firstRegDiv.style.display = 'block';
+                tg.MainButton.hide()
             } else {
                 // Set the 'src' attribute to the next image
                 image.src = 'images/' + images[currentIndex];
