@@ -87,6 +87,7 @@ button:hover {
 
 
 
+/* _____________CONTENT_________________ */
 #contectimg {
     border: 1px solid #bdbcbc;
     padding: 0px;
@@ -95,6 +96,8 @@ button:hover {
     height: auto;
 }
 
+
+/* _____________PREVIEW____________________ */
 #preview {
     display: flex;
     justify-content: center;
@@ -120,7 +123,7 @@ button:hover {
 }
 
 
-/* EEEEEEEEEEEEEEEEEEE NOT THIS ONE */
+/* ____________LOGO_________________ */
 
 .main-image-frame {
     max-width: 90%;
@@ -137,6 +140,8 @@ button:hover {
     display: block;
 
 }
+
+/* ________HUI ZNAET_____________ */
 
 .image-frame {
     max-width: 90%;
