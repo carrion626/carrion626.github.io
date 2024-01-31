@@ -94,7 +94,7 @@ button:hover {
     align-items: center;
     width: 90%;
     margin: 0 auto;
-    margin-top: 30px;
+    margin-top: 20px;
     border: 1px outset #bdbcbc;
     padding-top: 150%; /* 9/16 aspect ratio */
     position: relative;
