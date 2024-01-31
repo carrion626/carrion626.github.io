@@ -117,7 +117,7 @@ button:hover {
     justify-content: center;
     align-items: center;
     width: 95vw; /* 95% of the viewport width */
-    height: calc(95vw * 3 / 2); /* Height is calculated based on width and 3:5 aspect ratio */
+    height: calc(95vw * 5 / 3); /* Height is calculated based on width and 3:5 aspect ratio */
     margin: 0 auto; /* Center the container horizontally */
     border: 1px solid #bdbcbc;
     position: relative;
