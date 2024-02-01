@@ -96,7 +96,7 @@ button:hover {
     margin: 0 auto;
     margin-top: 20px;
     border: 1px solid #bdbcbc;
-    padding-top: 150%; /* 9/16 aspect ratio */
+    padding-top: 140%;
     position: relative;
     overflow: hidden;
 }
