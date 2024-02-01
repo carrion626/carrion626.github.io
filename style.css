@@ -95,7 +95,7 @@ button:hover {
     width: 90%;
     margin: 0 auto;
     margin-top: 20px;
-    border: 1px outset #bdbcbc;
+    border: 1px solid #bdbcbc;
     padding-top: 150%; /* 9/16 aspect ratio */
     position: relative;
     overflow: hidden;
@@ -142,7 +142,7 @@ button:hover {
     width: 90%;
     margin: 0 auto;
     margin-top: 30px;
-    border: 1px outset #bdbcbc;
+    border: 1px solid #bdbcbc;
     padding-top: 56.25%; /* 9/16 aspect ratio */
     position: relative;
     overflow: hidden;
@@ -166,7 +166,7 @@ button:hover {
     width: 90%;
     margin: 0 auto;
     margin-top: 30px;
-    border: 1px outset #bdbcbc;
+    border: 1px solid #bdbcbc;
     padding-top: 25%; /* 1/4 aspect ratio */
     position: relative;
     overflow: hidden;
