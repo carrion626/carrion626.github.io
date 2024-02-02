@@ -1,87 +1,101 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zoomable Image</title>
-    <style>
-        body {
-            margin: 0;
-            overflow: hidden; /* Prevent scrollbars when zooming */
+<script>
+    const zoomImage = document.getElementById('zoomImage');
+    let initialDistance = 0;
+    let initialScale = 1;
+    let currentScale = 1;
+    let lastTouchX = 0;
+    let lastTouchY = 0;
+
+    zoomImage.addEventListener('touchstart', function (e) {
+        if (e.touches.length === 2) {
+            initialDistance = Math.hypot(
+                e.touches[0].clientX - e.touches[1].clientX,
+                e.touches[0].clientY - e.touches[1].clientY
+            );
+
+            initialScale = currentScale;
+        } else if (e.touches.length === 1) {
+            lastTouchX = e.touches[0].clientX;
+            lastTouchY = e.touches[0].clientY;
         }
+    });
 
-        #zoomContainer {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #000;
-            z-index: 999;
-            cursor: zoom-out; /* Show zoom-out cursor */
+    zoomImage.addEventListener('touchmove', function (e) {
+        if (e.touches.length === 2) {
+            e.preventDefault(); // Prevent default touch behavior
+
+            const currentDistance = Math.hypot(
+                e.touches[0].clientX - e.touches[1].clientX,
+                e.touches[0].clientY - e.touches[1].clientY
+            );
+
+            const scale = (currentDistance / initialDistance) * initialScale;
+
+            // Limit the scale to a certain range, e.g., 0.5 to 3
+            currentScale = Math.min(Math.max(scale, 0.5), 3);
+
+            zoomImage.style.transform = `scale(${currentScale})`;
+        } else if (e.touches.length === 1) {
+            const touchX = e.touches[0].clientX;
+            const touchY = e.touches[0].clientY;
+
+            const deltaX = touchX - lastTouchX;
+            const deltaY = touchY - lastTouchY;
+
+            zoomImage.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(${currentScale})`;
+
+            lastTouchX = touchX;
+            lastTouchY = touchY;
         }
+    });
 
-        #zoomImage {
-            max-width: 100%;
-            max-height: 100%;
-            cursor: zoom-out; /* Show zoom-out cursor */
+    zoomImage.addEventListener('touchend', function (e) {
+        zoomImage.style.transition = 'transform 0.3s ease'; // Apply smooth transition
+        zoomImage.style.transform = `translate(0px, 0px) scale(1)`; // Reset the image position and scale
+        currentScale = 1; // Reset the current scale to 1
+    });
+</script>
+
+<!-- DOWN WORKS!!!!!!! -->
+
+<script>
+    const zoomImage = document.getElementById('zoomImage');
+    let initialDistance = 0;
+    let initialScale = 1;
+    let currentScale = 1;
+
+    zoomImage.addEventListener('touchstart', function (e) {
+        if (e.touches.length === 2) {
+            initialDistance = Math.hypot(
+                e.touches[0].clientX - e.touches[1].clientX,
+                e.touches[0].clientY - e.touches[1].clientY
+            );
+
+            initialScale = currentScale;
         }
-    </style>
-</head>
-<body>
-    <div id="zoomContainer">
-        <img id="zoomImage" src="images/prog2.jpg">
-    </div>
+    });
 
-    <div id="contectimg">
-        <img id="originalImage" src="images/prog2.jpg" class="zoomable-image">
-    </div>
+    zoomImage.addEventListener('touchmove', function (e) {
+        if (e.touches.length === 2) {
+            e.preventDefault(); // Prevent default touch behavior
 
-    <script>
-        const originalImage = document.getElementById('originalImage');
-        const zoomContainer = document.getElementById('zoomContainer');
-        const zoomImage = document.getElementById('zoomImage');
+            const currentDistance = Math.hypot(
+                e.touches[0].clientX - e.touches[1].clientX,
+                e.touches[0].clientY - e.touches[1].clientY
+            );
 
-        let initialDistance = 0;
-        let initialScale = 1;
-        let currentScale = 1;
+            const scale = (currentDistance / initialDistance) * initialScale;
 
-        originalImage.addEventListener('touchstart', function (e) {
-            if (e.touches.length === 2) {
-                initialDistance = Math.hypot(
-                    e.touches[0].clientX - e.touches[1].clientX,
-                    e.touches[0].clientY - e.touches[1].clientY
-                );
+            // Limit the scale to a certain range, e.g., 0.5 to 3
+            currentScale = Math.min(Math.max(scale, 0.5), 3);
 
-                initialScale = currentScale;
-                zoomContainer.style.display = 'none'; // Hide the frame
-            }
-        });
+            zoomImage.style.transform = `scale(${currentScale})`;
+        }
+    });
 
-        originalImage.addEventListener('touchmove', function (e) {
-            if (e.touches.length === 2) {
-                e.preventDefault(); // Prevent default touch behavior
-
-                const currentDistance = Math.hypot(
-                    e.touches[0].clientX - e.touches[1].clientX,
-                    e.touches[0].clientY - e.touches[1].clientY
-                );
-
-                const scale = (currentDistance / initialDistance) * initialScale;
-
-                // Limit the scale to a certain range, e.g., 0.5 to 3
-                currentScale = Math.min(Math.max(scale, 0.5), 3);
-
-                zoomImage.style.transform = `scale(${currentScale})`;
-            }
-        });
-
-        originalImage.addEventListener('touchend', function (e) {
-            zoomContainer.style.display = 'flex'; // Show the frame
-        });
-    </script>
-</body>
-</html>
+    zoomImage.addEventListener('touchend', function (e) {
+        zoomImage.style.transition = 'transform 0.3s ease'; // Apply smooth transition
+        zoomImage.style.transform = 'scale(1)'; // Reset the image scale
+        currentScale = 1; // Reset the current scale to 1
+    });
+</script>

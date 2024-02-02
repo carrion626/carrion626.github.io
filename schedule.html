@@ -39,7 +39,6 @@
         <br> 
     </div>
 
-
     <script>
         const zoomImage = document.getElementById('zoomImage');
         let initialDistance = 0;
@@ -61,8 +60,8 @@
             } else if (e.touches.length === 1) {
                 lastTouchX = e.touches[0].clientX;
                 lastTouchY = e.touches[0].clientY;
-                lastTranslateX = parseFloat(getComputedStyle(zoomImage).transform.split(',')[4]);
-                lastTranslateY = parseFloat(getComputedStyle(zoomImage).transform.split(',')[5]);
+                lastTranslateX = parseFloat(zoomImage.style.transform.split('(')[1].split('px')[0]);
+                lastTranslateY = parseFloat(zoomImage.style.transform.split(',')[1].split('px')[0]);
             }
         });
     
@@ -97,7 +96,6 @@
             zoomImage.style.transform = `scale(${currentScale}) translate(${lastTranslateX}px, ${lastTranslateY}px)`; // Reset the image position and scale
         });
     </script>
-
     
 
 
