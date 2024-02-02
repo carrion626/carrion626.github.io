@@ -1,101 +1,99 @@
-<script>
-    const zoomImage = document.getElementById('zoomImage');
-    let initialDistance = 0;
-    let initialScale = 1;
-    let currentScale = 1;
-    let lastTouchX = 0;
-    let lastTouchY = 0;
-
-    zoomImage.addEventListener('touchstart', function (e) {
-        if (e.touches.length === 2) {
-            initialDistance = Math.hypot(
-                e.touches[0].clientX - e.touches[1].clientX,
-                e.touches[0].clientY - e.touches[1].clientY
-            );
-
-            initialScale = currentScale;
-        } else if (e.touches.length === 1) {
-            lastTouchX = e.touches[0].clientX;
-            lastTouchY = e.touches[0].clientY;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title>Main page</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="custom.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/medium-zoom/dist/medium-zoom.css">
+    <style>
+        /* Add your custom styles here */
+        .js-resize-sensor, .t-CardsRegion, .a-CardView-media, .a-TMV-w-scroll {
+            overflow: visible!important;
         }
-    });
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const pinchZoom = (imageElement) => {
+                let imageElementScale = 1;
+                let start = {};
 
-    zoomImage.addEventListener('touchmove', function (e) {
-        if (e.touches.length === 2) {
-            e.preventDefault(); // Prevent default touch behavior
+                const distance = (event) => {
+                    return Math.hypot(event.touches[0].pageX - event.touches[1].pageX, event.touches[0].pageY - event.touches[1].pageY);
+                };
 
-            const currentDistance = Math.hypot(
-                e.touches[0].clientX - e.touches[1].clientX,
-                e.touches[0].clientY - e.touches[1].clientY
-            );
+                imageElement.addEventListener('touchstart', (event) => {
+                    if (event.touches.length === 2) {
+                        event.preventDefault();
+                        start.x = (event.touches[0].pageX + event.touches[1].pageX) / 2;
+                        start.y = (event.touches[0].pageY + event.touches[1].pageY) / 2;
+                        start.distance = distance(event);
+                    }
+                });
 
-            const scale = (currentDistance / initialDistance) * initialScale;
+                imageElement.addEventListener('touchmove', (event) => {
+                    if (event.touches.length === 2) {
+                        event.preventDefault();
+                        let scale;
+                        if (event.scale) {
+                            scale = event.scale;
+                        } else {
+                            const deltaDistance = distance(event);
+                            scale = deltaDistance / start.distance;
+                        }
+                        imageElementScale = Math.min(Math.max(1, scale), 4);
+                        const deltaX = (((event.touches[0].pageX + event.touches[1].pageX) / 2) - start.x) * 2;
+                        const deltaY = (((event.touches[0].pageY + event.touches[1].pageY) / 2) - start.y) * 2;
+                        const transform = `translate3d(${deltaX}px, ${deltaY}px, 0) scale(${imageElementScale})`;
+                        imageElement.style.transform = transform;
+                        imageElement.style.WebkitTransform = transform;
+                        imageElement.style.zIndex = "9999";
+                    }
+                });
 
-            // Limit the scale to a certain range, e.g., 0.5 to 3
-            currentScale = Math.min(Math.max(scale, 0.5), 3);
+                imageElement.addEventListener('touchend', (event) => {
+                    imageElement.style.transform = "";
+                    imageElement.style.WebkitTransform = "";
+                    imageElement.style.zIndex = "";
+                });
+            };
 
-            zoomImage.style.transform = `scale(${currentScale})`;
-        } else if (e.touches.length === 1) {
-            const touchX = e.touches[0].clientX;
-            const touchY = e.touches[0].clientY;
-
-            const deltaX = touchX - lastTouchX;
-            const deltaY = touchY - lastTouchY;
-
-            zoomImage.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(${currentScale})`;
-
-            lastTouchX = touchX;
-            lastTouchY = touchY;
-        }
-    });
-
-    zoomImage.addEventListener('touchend', function (e) {
-        zoomImage.style.transition = 'transform 0.3s ease'; // Apply smooth transition
-        zoomImage.style.transform = `translate(0px, 0px) scale(1)`; // Reset the image position and scale
-        currentScale = 1; // Reset the current scale to 1
-    });
-</script>
-
-<!-- DOWN WORKS!!!!!!! -->
-
-<script>
-    const zoomImage = document.getElementById('zoomImage');
-    let initialDistance = 0;
-    let initialScale = 1;
-    let currentScale = 1;
-
-    zoomImage.addEventListener('touchstart', function (e) {
-        if (e.touches.length === 2) {
-            initialDistance = Math.hypot(
-                e.touches[0].clientX - e.touches[1].clientX,
-                e.touches[0].clientY - e.touches[1].clientY
-            );
-
-            initialScale = currentScale;
-        }
-    });
-
-    zoomImage.addEventListener('touchmove', function (e) {
-        if (e.touches.length === 2) {
-            e.preventDefault(); // Prevent default touch behavior
-
-            const currentDistance = Math.hypot(
-                e.touches[0].clientX - e.touches[1].clientX,
-                e.touches[0].clientY - e.touches[1].clientY
-            );
-
-            const scale = (currentDistance / initialDistance) * initialScale;
-
-            // Limit the scale to a certain range, e.g., 0.5 to 3
-            currentScale = Math.min(Math.max(scale, 0.5), 3);
-
-            zoomImage.style.transform = `scale(${currentScale})`;
-        }
-    });
-
-    zoomImage.addEventListener('touchend', function (e) {
-        zoomImage.style.transition = 'transform 0.3s ease'; // Apply smooth transition
-        zoomImage.style.transform = 'scale(1)'; // Reset the image scale
-        currentScale = 1; // Reset the current scale to 1
-    });
-</script>
+            const zoomableImages = document.querySelectorAll('.zoomable-image');
+            zoomableImages.forEach(image => {
+                pinchZoom(image);
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="sch">
+        <div class="image-frame">
+            <img src="images/notlogo.jpg" alt="Huyatina Image">
+        </div>
+        <br>
+        <h1>Schedule</h1>
+        <div id="contectimg">
+            <img id="zoomImage1" src="images/prog2.jpg" class="zoomable-image">
+        </div> 
+        <div id="contectimg">
+            <img id="zoomImage2" src="images/prog4.jpg" class="zoomable-image">
+        </div>
+        <div id="contectimg">
+            <img id="zoomImage3" src="images/check2.jpg" class="zoomable-image">
+        </div>   
+        <div id="contectimg">     
+            <img id="zoomImage4" src="images/fhfhfh.jpeg" class="zoomable-image">
+        </div>
+        <div id="contectimg">
+            <img id="zoomImage5" src="images/prog2.jpg" class="zoomable-image">
+        </div>
+        <br> 
+        <br> 
+    </div>
+</body>
+</html>
