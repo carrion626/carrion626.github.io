@@ -89,9 +89,7 @@ button:hover {
 
 /* _____________CONTENT_________________  TODO: FIX */
 #contectimg {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
     width: 90%;
     margin: 0 auto;
     margin-top: 20px;
@@ -102,12 +100,8 @@ button:hover {
 }
 
 #contectimg img {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
-    height: 100%;
-    object-fit: contain;
+    height: auto;
     transition: transform 0.5s ease; /* Smooth transition */
 }
 
