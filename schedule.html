@@ -44,61 +44,45 @@
         let initialDistance = 0;
         let initialScale = 1;
         let currentScale = 1;
-        let lastTouchX = 0;
-        let lastTouchY = 0;
-        let lastTranslateX = 0;
-        let lastTranslateY = 0;
+        let initialTranslateX = 0;
+        let initialTranslateY = 0;
     
         zoomImage.addEventListener('touchstart', function (e) {
             if (e.touches.length === 2) {
+                e.preventDefault(); // Prevent default touch behavior
                 initialDistance = Math.hypot(
                     e.touches[0].clientX - e.touches[1].clientX,
                     e.touches[0].clientY - e.touches[1].clientY
                 );
-    
                 initialScale = currentScale;
-            } else if (e.touches.length === 1) {
-                lastTouchX = e.touches[0].clientX;
-                lastTouchY = e.touches[0].clientY;
-                lastTranslateX = parseFloat(zoomImage.style.transform.split('translate(')[1].split('px')[0]);
-                lastTranslateY = parseFloat(zoomImage.style.transform.split(',')[1].split('px')[0]);
+                initialTranslateX = parseFloat(getComputedStyle(zoomImage).transform.split(',')[4]);
+                initialTranslateY = parseFloat(getComputedStyle(zoomImage).transform.split(',')[5]);
             }
         });
     
         zoomImage.addEventListener('touchmove', function (e) {
             if (e.touches.length === 2) {
                 e.preventDefault(); // Prevent default touch behavior
-    
                 const currentDistance = Math.hypot(
                     e.touches[0].clientX - e.touches[1].clientX,
                     e.touches[0].clientY - e.touches[1].clientY
                 );
-    
                 const scale = (currentDistance / initialDistance) * initialScale;
-    
-                // Limit the scale to a certain range, e.g., 0.5 to 3
                 currentScale = Math.min(Math.max(scale, 0.5), 3);
-    
                 const touchCenterX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
                 const touchCenterY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
-    
-                zoomImage.style.transform = `scale(${currentScale}) translate(${lastTranslateX}px, ${lastTranslateY}px)`;
-            } else if (e.touches.length === 1) {
-                const touchX = e.touches[0].clientX;
-                const touchY = e.touches[0].clientY;
-    
-                const deltaX = touchX - lastTouchX;
-                const deltaY = touchY - lastTouchY;
-    
-                zoomImage.style.transform = `scale(${currentScale}) translate(${lastTranslateX + deltaX}px, ${lastTranslateY + deltaY}px)`;
+                const translateX = touchCenterX - (touchCenterX - initialTranslateX) * currentScale / initialScale;
+                const translateY = touchCenterY - (touchCenterY - initialTranslateY) * currentScale / initialScale;
+                zoomImage.style.transform = `scale(${currentScale}) translate(${translateX}px, ${translateY}px)`;
             }
         });
     
         zoomImage.addEventListener('touchend', function (e) {
-            zoomImage.style.transition = 'transform 0.3s ease'; // Apply smooth transition
-            zoomImage.style.transform = `scale(${currentScale}) translate(${lastTranslateX}px, ${lastTranslateY}px)`; // Reset the image position and scale
+            zoomImage.style.transition = 'transform 0.3s ease';
+            zoomImage.style.transform = `scale(${currentScale}) translate(${initialTranslateX}px, ${initialTranslateY}px)`;
         });
     </script>
+    
     
     
 
