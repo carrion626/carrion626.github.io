@@ -96,9 +96,9 @@ button:hover {
     margin: 0 auto;
     margin-top: 20px;
     border: 1px solid #bdbcbc;
-    padding-top: 140%;
-    position: relative;
+    padding-top: 66.67%; /* 2:3 aspect ratio */
     overflow: hidden;
+    position: relative;
 }
 
 #contectimg img {
@@ -107,7 +107,8 @@ button:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
+    transition: transform 0.5s ease; /* Smooth transition */
 }
 
 
@@ -186,6 +187,7 @@ button:hover {
 .zoomable-image {
     width: 100%;
     height: auto;
+    touch-action: none; /* Disable default touch actions */
 }
 
 
