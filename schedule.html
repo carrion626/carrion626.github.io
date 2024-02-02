@@ -70,11 +70,10 @@
 
             // Add event listener for touchmove on the document
             document.addEventListener('touchmove', (event) => {
-                // Check if the touch event involves a single touch
                 if (event.touches.length === 1) {
-                    event.preventDefault(); // Prevent default scrolling
+                    event.stopPropagation(); // Stop propagation to prevent interference with pinch zoom
                 }
-            }, { passive: false }); // Set passive option to false to enable preventDefault
+            }, { passive: false });
         });
     </script>
 </head>
