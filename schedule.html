@@ -20,65 +20,54 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const pinchZoom = (imageElement) => {
-            let imageElementScale = 1;
-            let start = {};
-            let lastDeltaX = 0;
-            let lastDeltaY = 0;
+                let imageElementScale = 1;
+                let start = {};
 
-            const distance = (event) => {
-                return Math.hypot(event.touches[0].pageX - event.touches[1].pageX, event.touches[0].pageY - event.touches[1].pageY);
-            };
+                const distance = (event) => {
+                    return Math.hypot(event.touches[0].pageX - event.touches[1].pageX, event.touches[0].pageY - event.touches[1].pageY);
+                };
 
-            const updateTransform = () => {
-                const transform = `translate3d(${lastDeltaX}px, ${lastDeltaY}px, 0) scale(${imageElementScale})`;
-                imageElement.style.transform = transform;
-                imageElement.style.WebkitTransform = transform;
-                imageElement.style.zIndex = "9999";
-            };
-
-            imageElement.addEventListener('touchstart', (event) => {
-                if (event.touches.length === 2) {
-                    event.preventDefault();
-                    start.x = (event.touches[0].pageX + event.touches[1].pageX) / 2;
-                    start.y = (event.touches[0].pageY + event.touches[1].pageY) / 2;
-                    start.distance = distance(event);
-                }
-            });
-
-            imageElement.addEventListener('touchmove', (event) => {
-                if (event.touches.length === 2) {
-                    event.preventDefault();
-                    let scale;
-                    if (event.scale) {
-                        scale = event.scale;
-                    } else {
-                        const deltaDistance = distance(event);
-                        scale = deltaDistance / start.distance;
+                imageElement.addEventListener('touchstart', (event) => {
+                    if (event.touches.length === 2) {
+                        event.preventDefault();
+                        start.x = (event.touches[0].pageX + event.touches[1].pageX) / 2;
+                        start.y = (event.touches[0].pageY + event.touches[1].pageY) / 2;
+                        start.distance = distance(event);
                     }
-                    imageElementScale = Math.min(Math.max(1, scale), 4);
+                });
 
-                    const deltaX = (((event.touches[0].pageX + event.touches[1].pageX) / 2) - start.x) * 2;
-                    const deltaY = (((event.touches[0].pageY + event.touches[1].pageY) / 2) - start.y) * 2;
+                imageElement.addEventListener('touchmove', (event) => {
+                    if (event.touches.length === 2) {
+                        event.preventDefault();
+                        let scale;
+                        if (event.scale) {
+                            scale = event.scale;
+                        } else {
+                            const deltaDistance = distance(event);
+                            scale = deltaDistance / start.distance;
+                        }
+                        imageElementScale = Math.min(Math.max(1, scale), 4);
+                        const deltaX = (((event.touches[0].pageX + event.touches[1].pageX) / 2) - start.x) * 2;
+                        const deltaY = (((event.touches[0].pageY + event.touches[1].pageY) / 2) - start.y) * 2;
+                        const transform = `translate3d(${deltaX}px, ${deltaY}px, 0) scale(${imageElementScale})`;
+                        imageElement.style.transform = transform;
+                        imageElement.style.WebkitTransform = transform;
+                        imageElement.style.zIndex = "9999";
+                    }
+                });
 
-                    lastDeltaX = deltaX;
-                    lastDeltaY = deltaY;
+                imageElement.addEventListener('touchend', (event) => {
+                    imageElement.style.transform = "";
+                    imageElement.style.WebkitTransform = "";
+                    imageElement.style.zIndex = "";
+                });
+            };
 
-                    // Update the transform using requestAnimationFrame
-                    requestAnimationFrame(updateTransform);
-                }
+            const zoomableImages = document.querySelectorAll('.zoomable-image');
+            zoomableImages.forEach(image => {
+                pinchZoom(image);
             });
-
-            imageElement.addEventListener('touchend', (event) => {
-                // Reset image to its original format
-                imageElement.style.transform = "";
-                imageElement.style.WebkitTransform = "";
-                imageElement.style.zIndex = "";
-                lastDeltaX = 0;
-                lastDeltaY = 0;
-            });
-        };
-    });
-
+        });
     </script>
 </head>
 <body>
