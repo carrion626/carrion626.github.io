@@ -67,6 +67,13 @@
             zoomableImages.forEach(image => {
                 pinchZoom(image);
             });
+
+            // Add event listener for touchmove on the document
+            document.addEventListener('touchmove', (event) => {
+                if (event.touches.length === 1) {
+                    event.stopPropagation(); // Stop propagation to prevent interference with pinch zoom
+                }
+            }, { passive: false });
         });
     </script>
 </head>
