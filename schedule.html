@@ -60,7 +60,7 @@
             } else if (e.touches.length === 1) {
                 lastTouchX = e.touches[0].clientX;
                 lastTouchY = e.touches[0].clientY;
-                lastTranslateX = parseFloat(zoomImage.style.transform.split('(')[1].split('px')[0]);
+                lastTranslateX = parseFloat(zoomImage.style.transform.split('translate(')[1].split('px')[0]);
                 lastTranslateY = parseFloat(zoomImage.style.transform.split(',')[1].split('px')[0]);
             }
         });
@@ -79,6 +79,9 @@
                 // Limit the scale to a certain range, e.g., 0.5 to 3
                 currentScale = Math.min(Math.max(scale, 0.5), 3);
     
+                const touchCenterX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+                const touchCenterY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+    
                 zoomImage.style.transform = `scale(${currentScale}) translate(${lastTranslateX}px, ${lastTranslateY}px)`;
             } else if (e.touches.length === 1) {
                 const touchX = e.touches[0].clientX;
@@ -96,6 +99,7 @@
             zoomImage.style.transform = `scale(${currentScale}) translate(${lastTranslateX}px, ${lastTranslateY}px)`; // Reset the image position and scale
         });
     </script>
+    
     
 
 
