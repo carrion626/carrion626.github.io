@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zoomable Image</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden; /* Prevent scrollbars when zooming */
+        }
+
+        #zoomContainer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #000;
+            z-index: 999;
+            cursor: zoom-out; /* Show zoom-out cursor */
+        }
+
+        #zoomImage {
+            max-width: 100%;
+            max-height: 100%;
+            cursor: zoom-out; /* Show zoom-out cursor */
+        }
+    </style>
+</head>
+<body>
+    <div id="zoomContainer">
+        <img id="zoomImage" src="images/prog2.jpg">
+    </div>
+
+    <div id="contectimg">
+        <img id="originalImage" src="images/prog2.jpg" class="zoomable-image">
+    </div>
+
+    <script>
+        const originalImage = document.getElementById('originalImage');
+        const zoomContainer = document.getElementById('zoomContainer');
+        const zoomImage = document.getElementById('zoomImage');
+
+        let initialDistance = 0;
+        let initialScale = 1;
+        let currentScale = 1;
+
+        originalImage.addEventListener('touchstart', function (e) {
+            if (e.touches.length === 2) {
+                initialDistance = Math.hypot(
+                    e.touches[0].clientX - e.touches[1].clientX,
+                    e.touches[0].clientY - e.touches[1].clientY
+                );
+
+                initialScale = currentScale;
+                zoomContainer.style.display = 'none'; // Hide the frame
+            }
+        });
+
+        originalImage.addEventListener('touchmove', function (e) {
+            if (e.touches.length === 2) {
+                e.preventDefault(); // Prevent default touch behavior
+
+                const currentDistance = Math.hypot(
+                    e.touches[0].clientX - e.touches[1].clientX,
+                    e.touches[0].clientY - e.touches[1].clientY
+                );
+
+                const scale = (currentDistance / initialDistance) * initialScale;
+
+                // Limit the scale to a certain range, e.g., 0.5 to 3
+                currentScale = Math.min(Math.max(scale, 0.5), 3);
+
+                zoomImage.style.transform = `scale(${currentScale})`;
+            }
+        });
+
+        originalImage.addEventListener('touchend', function (e) {
+            zoomContainer.style.display = 'flex'; // Show the frame
+        });
+    </script>
+</body>
+</html>
