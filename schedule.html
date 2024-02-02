@@ -44,6 +44,8 @@
         let initialDistance = 0;
         let initialScale = 1;
         let currentScale = 1;
+        let lastTouchX = 0;
+        let lastTouchY = 0;
     
         zoomImage.addEventListener('touchstart', function (e) {
             if (e.touches.length === 2) {
@@ -53,6 +55,9 @@
                 );
     
                 initialScale = currentScale;
+            } else if (e.touches.length === 1) {
+                lastTouchX = e.touches[0].clientX;
+                lastTouchY = e.touches[0].clientY;
             }
         });
     
@@ -71,15 +76,27 @@
                 currentScale = Math.min(Math.max(scale, 0.5), 3);
     
                 zoomImage.style.transform = `scale(${currentScale})`;
+            } else if (e.touches.length === 1) {
+                const touchX = e.touches[0].clientX;
+                const touchY = e.touches[0].clientY;
+    
+                const deltaX = touchX - lastTouchX;
+                const deltaY = touchY - lastTouchY;
+    
+                zoomImage.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(${currentScale})`;
+    
+                lastTouchX = touchX;
+                lastTouchY = touchY;
             }
         });
     
         zoomImage.addEventListener('touchend', function (e) {
             zoomImage.style.transition = 'transform 0.3s ease'; // Apply smooth transition
-            zoomImage.style.transform = 'scale(1)'; // Reset the image scale
+            zoomImage.style.transform = `translate(0px, 0px) scale(1)`; // Reset the image position and scale
             currentScale = 1; // Reset the current scale to 1
         });
     </script>
+    
 
 
 </body>
