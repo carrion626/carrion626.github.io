@@ -44,38 +44,40 @@
         let initialDistance = 0;
         let initialScale = 1;
         let currentScale = 1;
-
+    
         zoomImage.addEventListener('touchstart', function (e) {
             if (e.touches.length === 2) {
                 initialDistance = Math.hypot(
                     e.touches[0].clientX - e.touches[1].clientX,
                     e.touches[0].clientY - e.touches[1].clientY
                 );
-
+    
                 initialScale = currentScale;
             }
         });
-
+    
         zoomImage.addEventListener('touchmove', function (e) {
             if (e.touches.length === 2) {
                 e.preventDefault(); // Prevent default touch behavior
-
+    
                 const currentDistance = Math.hypot(
                     e.touches[0].clientX - e.touches[1].clientX,
                     e.touches[0].clientY - e.touches[1].clientY
                 );
-
+    
                 const scale = (currentDistance / initialDistance) * initialScale;
-
+    
                 // Limit the scale to a certain range, e.g., 0.5 to 3
                 currentScale = Math.min(Math.max(scale, 0.5), 3);
-
+    
                 zoomImage.style.transform = `scale(${currentScale})`;
             }
         });
-
+    
         zoomImage.addEventListener('touchend', function (e) {
-            zoomImage.style.transition = 'transform 0.5s ease'; // Apply smooth transition
+            zoomImage.style.transition = 'transform 0.3s ease'; // Apply smooth transition
+            zoomImage.style.transform = 'scale(1)'; // Reset the image scale
+            currentScale = 1; // Reset the current scale to 1
         });
     </script>
 
