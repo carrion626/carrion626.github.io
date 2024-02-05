@@ -120,6 +120,29 @@ button:hover {
     transition: transform 0.3s ease; /* Smooth transition */
 }
 
+/* PRESENTATION SPEAKERS */
+#contectimg1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 20px;
+    border: 1px solid #bdbcbc;
+    padding-top: 45%; /* 2:3 aspect ratio */
+    overflow: hidden;
+    position: relative;
+}
+
+#contectimg1 img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;    /* CHANGE THIS IF SMTH */
+    transition: transform 0.3s ease; /* Smooth transition */
+}
 
 
 
