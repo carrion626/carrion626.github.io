@@ -12,40 +12,139 @@
 </head>
 <body>
 
-    <div id="preview">
-        <img id="imagefirst" src="images/preview1.jpg">
+    <div id="second_reg">
+        <div class="main-image-frame">
+            <img src="images/logo.jpg" alt="Huyatina Image">
+        </div>
+        <br>
+        <h1>Регистрация</h1>
+        <hr style="border: 0; height: 1px; background-color: #ccc; margin: 30px 0;">
 
+        <form method="POST">
+            <!-- ADD "REQUIRED TO EVERY FIELD" -->
+            <input type="text" id="name" placeholder="Имя" required> 
+            <input type="text" id="lastname" placeholder="Фамилия" >
+            <input type="text" id="email" placeholder="e-mail@gmail.com" >
+            <input type="text" id="tel" placeholder="Телефон" >
+            <input type="text" id="city" placeholder="Город" >
+            <!-- <input type="text" id="school" placeholder="school" >
+            <input type="text" id="position" placeholder="position"> -->
+            <button id="register">Зарегистрироваться</button>
+
+        </form>
     </div>
+
+    <!-- Add three <br> elements initially -->
+    <br id="br1">
+    <!-- <br id="br2">
+    <br id="br3">
+    <br id="br4">
+    <br id="br5">
+    <br id="br6"> -->
+
     <script>
-        const images = ['preview1.jpg', 'preview2.jpg', 'preview3.jpg', 'preview4.jpg', 'preview5.jpg'];
-        let currentIndex = 0;
-
         let tg = window.Telegram.WebApp;
-        tg.ready()
-        tg.expand()
-        
 
-        const image = document.getElementById('imagefirst');
-        const previewDiv = document.getElementById('preview');
-        tg.MainButton.text = "Далее >>"; //изменяем текст кнопки 
+        tg.MainButton.text = "Регистрация"; //изменяем текст кнопки 
         tg.MainButton.show()
+        Telegram.WebApp.onEvent('mainButtonClicked', function(){
+            window.location.href = "https://carrion626.github.io/home.html";
+        });
+
+
+
+
+
         const registerButton = document.getElementById('register');
 
-        Telegram.WebApp.onEvent('mainButtonClicked', function(){
-            // Update the index for the next image
-            currentIndex = (currentIndex + 1) % images.length;
-            
-            if (currentIndex === 0) {
-                // If the end is reached, hide "preview" and show "first_reg"
-                previewDiv.style.display = 'none';
-                firstRegDiv.style.display = 'block';
-                tg.MainButton.hide()
-            } else {
-                // Set the 'src' attribute to the next image
-                image.src = 'images/' + images[currentIndex];
+        let reg = document.getElementById("register");
+    
+        reg.addEventListener("click", async (event) => {
+            // Prevent the default form submission behavior
+            event.preventDefault();
+
+            // Get input values
+            let name = document.getElementById("name").value;
+            let last_name = document.getElementById("lastname").value;
+            let email = document.getElementById("email").value;
+            let tel = document.getElementById("tel").value;
+
+            // Basic checks
+            if (!name || !last_name || !email || !tel) {
+                alert("Please fill in all required fields.");
+                return;
             }
 
+            let data = {
+                name: name,
+                last_name: last_name,
+                email: email,
+                tel: tel
+            };
+
+            try {
+                // Make an HTTP POST request to your server
+                let response = await fetch('https://11d8-2a02-ff0-220-a1c6-e1bd-b960-4080-14ca.ngrok-free.app/submit_registration', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                });
+
+                if (response.ok) {
+                    // Server successfully processed the request
+                    let responseData = await response.json();
+                    console.log(responseData);
+                    tg.showAlert("Спасибо за Регистрацию!", () => {
+                    // Callback function after the alert is closed
+                    // Redirect to the home page
+                    window.location.href = 'https://carrion626.github.io/home.html';
+                });
+                } else {
+                    console.error('Server returned an error:', response.status);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
         });
+        
+        document.body.addEventListener('click', (event) => {
+            const clickedElement = event.target;
+
+            if (clickedElement.tagName !== 'INPUT' && clickedElement !== registerButton) {
+                document.activeElement.blur();
+            }
+        });
+
+        // KEYBOARD MOVE
+        window.addEventListener('focus', handleFocus);
+        
+        // event listener for the blur event
+        window.addEventListener('blur', handleBlur);
+
+        function handleFocus() {
+            // Add <br> elements when the keyboard is opened
+            document.getElementById('br1').style.display = 'block';
+            // document.getElementById('br2').style.display = 'block';
+            // document.getElementById('br3').style.display = 'block';
+            // document.getElementById('br4').style.display = 'block';
+            // document.getElementById('br5').style.display = 'block';
+            // document.getElementById('br6').style.display = 'block';
+
+        }
+
+        function handleBlur() {
+            // Remove <br> elements when the keyboard is closed
+            document.getElementById('br1').style.display = 'none';
+            // document.getElementById('br2').style.display = 'none';
+            // document.getElementById('br3').style.display = 'none';
+            // document.getElementById('br4').style.display = 'none';
+            // document.getElementById('br5').style.display = 'none';
+            // document.getElementById('br6').style.display = 'none';
+        }
+
     </script>
+      
 </body>
 </html>
