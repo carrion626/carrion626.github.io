@@ -57,16 +57,16 @@
                     // await new Promise(resolve => setTimeout(resolve, 2000));
 
                     tg.showPopup({
-                        title: 'PDF Sent',
-                        message: 'PDF was sent to a chat. Do you want to continue using the web app?',
+                        title: 'PDF Отправлен',
+                        message: 'PDF был отправлен в чат. Хотите продолжать использовать вэб приложение?',
                         buttons: [
-                            { id: 'yes', type: 'default', text: 'YES' },
-                            { id: 'not_yes', type: 'default', text: 'Not YES' },
+                            { id: 'yes', type: 'default', text: 'Да' },
+                            { id: 'not_yes', type: 'default', text: 'Закрыть' },
                         ],
                     }, (buttonId) => {
                         if (buttonId === 'yes') {
                             // User pressed 'Open'
-                            window.location.href = 'https://carrion626.github.io/home.html';
+                            window.location.href = 'https://carrion626.github.io/presentation.html';
                         } else {
                             // User pressed 'Close'
                             tg.close();
