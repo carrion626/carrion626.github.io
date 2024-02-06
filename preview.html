@@ -29,6 +29,8 @@
             <input type="text" id="city" placeholder="Город" >
             <!-- <input type="text" id="school" placeholder="school" >
             <input type="text" id="position" placeholder="position"> -->
+            <button id="register">Зарегистрироваться</button>
+
         </form>
     </div>
 
@@ -42,13 +44,20 @@
 
     <script>
         let tg = window.Telegram.WebApp;
-        tg.ready()
 
-        tg.MainButton.text = "Регистрация"; //изменяем текст кнопки 
+        tg.MainButton.text = "Назад"; //изменяем текст кнопки 
         tg.MainButton.show()
-        Telegram.WebApp.onEvent('mainButtonClicked', async (event) => {
-            // // Prevent the default form submission behavior
-            // event.preventDefault();
+        tg.MainButton.hide()
+        Telegram.WebApp.onEvent('mainButtonClicked', function(){
+            window.location.href = "https://carrion626.github.io/home.html";
+        });
+        const registerButton = document.getElementById('register');
+
+        let reg = document.getElementById("register");
+    
+        reg.addEventListener("click", async (event) => {
+            // Prevent the default form submission behavior
+            event.preventDefault();
 
             // Get input values
             let name = document.getElementById("name").value;
@@ -98,7 +107,8 @@
         
         document.body.addEventListener('click', (event) => {
             const clickedElement = event.target;
-            if (clickedElement.tagName !== 'INPUT' && clickedElement !== tg.MainButton) {
+
+            if (clickedElement.tagName !== 'INPUT' && clickedElement !== registerButton) {
                 document.activeElement.blur();
             }
         });
