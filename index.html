@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,11 +12,14 @@
 </head>
 <body>
 
-    <!-- <div id="preview">
+    <div id="preview">
         <img id="imagefirst" src="images/preview1.jpg">
-    </div> -->
 
-    <div id="first_reg">
+    </div>
+
+
+
+    <div id="first_reg" style="display: none;">
         <div class="main-image-frame">
             <img src="images/logo.jpg" alt="Huyatina Image">
         </div>
@@ -35,75 +37,45 @@
             <!-- <input type="text" id="school" placeholder="school" >
             <input type="text" id="position" placeholder="position"> -->
             <button id="register">Зарегистрироваться</button>
-
+            
         </form>
     </div>
-
-    <!-- Add three <br> elements initially -->
     <br id="br1">
-    <!-- <br id="br2">
-    <br id="br3">
-    <br id="br4">
-    <br id="br5">
-    <br id="br6"> -->
 
     <script>
+        const images = ['preview1.jpg', 'preview2.jpg', 'preview3.jpg', 'preview4.jpg', 'preview5.jpg'];
+        let currentIndex = 0;
+        
+
+        let tg = window.Telegram.WebApp;
+        tg.ready()
+        tg.expand()
+        
+        
+
+        const image = document.getElementById('imagefirst');
+        const previewDiv = document.getElementById('preview');
+        const firstRegDiv = document.getElementById('first_reg');
+        tg.MainButton.text = "Далее >>"; //изменяем текст кнопки 
+        tg.MainButton.show()
         const registerButton = document.getElementById('register');
 
-        let reg = document.getElementById("register");
-    
-        reg.addEventListener("click", async (event) => {
-            // Prevent the default form submission behavior
-            event.preventDefault();
-
-            // Get input values
-            let name = document.getElementById("name").value;
-            let last_name = document.getElementById("lastname").value;
-            let email = document.getElementById("email").value;
-            let tel = document.getElementById("tel").value;
-
-            // Basic checks
-            if (!name || !last_name || !email || !tel) {
-                alert("Please fill in all required fields.");
-                return;
+        Telegram.WebApp.onEvent('mainButtonClicked', function(){
+            // Update the index for the next image
+            currentIndex = (currentIndex + 1) % images.length;
+            
+            if (currentIndex === 0) {
+                // If the end is reached, hide "preview" and show "first_reg"
+                previewDiv.style.display = 'none';
+                firstRegDiv.style.display = 'block';
+                tg.MainButton.hide()
+            } else {
+                // Set the 'src' attribute to the next image
+                image.src = 'images/' + images[currentIndex];
             }
 
-            let data = {
-                name: name,
-                last_name: last_name,
-                email: email,
-                tel: tel
-            };
-
-            try {
-                // Make an HTTP POST request to your server
-                let response = await fetch('https://11d8-2a02-ff0-220-a1c6-e1bd-b960-4080-14ca.ngrok-free.app/submit_registration', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(data),
-                });
-
-                if (response.ok) {
-                    // Server successfully processed the request
-                    let responseData = await response.json();
-                    console.log(responseData);
-                    window.Telegram.WebApp.showAlert("Registration successful!", () => {
-                        
-
-
-
-                        window.location.href = 'https://carrion626.github.io/home.html';
-                });
-                } else {
-                    console.error('Server returned an error:', response.status);
-                }
-            } catch (error) {
-                console.error('Error:', error);
-            }
         });
-        
+
         document.body.addEventListener('click', (event) => {
             const clickedElement = event.target;
 
@@ -111,11 +83,10 @@
                 document.activeElement.blur();
             }
         });
-
-        // KEYBOARD MOVE
+        // Add an event listener for the focus event
         window.addEventListener('focus', handleFocus);
         
-        // event listener for the blur event
+        // Add an event listener for the blur event
         window.addEventListener('blur', handleBlur);
 
         function handleFocus() {
@@ -138,8 +109,65 @@
             // document.getElementById('br5').style.display = 'none';
             // document.getElementById('br6').style.display = 'none';
         }
+    </script>
+
+    <script>
+        tg.MainButton.text = "Далее >>"; //изменяем текст кнопки 
+        tg.MainButton.show()
+        Telegram.WebApp.onEvent('mainButtonClicked', async (event)=> {
+
+            event.preventDefault();
+
+            // Get input values
+            let name = document.getElementById("name").value;
+            let last_name = document.getElementById("lastname").value;
+            let email = document.getElementById("email").value;
+            let tel = document.getElementById("tel").value;
+
+            // Basic checks
+            if (!name || !last_name || !email || !tel) {
+                alert("Please fill in all required fields.");
+                return;
+            }
+
+            let data = {
+                name: name,
+                last_name: last_name,
+                email: email,
+                tel: tel,
+                id: tg.initDataUnsafe.user.id
+            };
+            
+
+            try {
+                // Make an HTTP POST request to your server
+                let response = await fetch('https://11d8-2a02-ff0-220-a1c6-e1bd-b960-4080-14ca.ngrok-free.app/submit_registration', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                });
+                if (response.ok) {
+                    // Server successfully processed the request
+                    let responseData = await response.json();
+                    console.log(responseData);
+                    tg.showAlert("Registration successful!", () => {
+                    // Callback function after the alert is closed
+                    // Redirect to the home page
+
+                    window.location.href = 'https://carrion626.github.io/home.html';
+                });
+                } else {
+                    console.error('Server returned an error:', response.status);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        });
 
     </script>
       
 </body>
 </html>
+
