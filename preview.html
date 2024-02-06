@@ -29,7 +29,7 @@
             <input type="text" id="city" placeholder="Город" >
             <!-- <input type="text" id="school" placeholder="school" >
             <input type="text" id="position" placeholder="position"> -->
-            <button id="register">Зарегистрироваться</button>
+            <button id="register" style="display: none;">Зарегистрироваться</button>
 
         </form>
     </div>
@@ -47,10 +47,14 @@
 
         tg.MainButton.text = "Назад"; //изменяем текст кнопки 
         tg.MainButton.show()
-        tg.MainButton.hide()
         Telegram.WebApp.onEvent('mainButtonClicked', function(){
-            window.location.href = "https://carrion626.github.io/home.html";
+            simulateRegisterButtonClick();
         });
+
+        function simulateRegisterButtonClick() {
+            document.getElementById('register').click();
+        }
+
         const registerButton = document.getElementById('register');
 
         let reg = document.getElementById("register");
