@@ -29,8 +29,6 @@
             <input type="text" id="city" placeholder="Город" >
             <!-- <input type="text" id="school" placeholder="school" >
             <input type="text" id="position" placeholder="position"> -->
-            <button id="register">Зарегистрироваться</button>
-
         </form>
     </div>
 
@@ -99,8 +97,7 @@
         
         document.body.addEventListener('click', (event) => {
             const clickedElement = event.target;
-
-            if (clickedElement.tagName !== 'INPUT' && clickedElement !== registerButton) {
+            if (clickedElement.tagName !== 'INPUT' && clickedElement !== tg.MainButton) {
                 document.activeElement.blur();
             }
         });
