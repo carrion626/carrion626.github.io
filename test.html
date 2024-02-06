@@ -8,126 +8,121 @@
     <meta name="format-detection" content="telephone=no">
     <title>Main page</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script src="custom.js"></script>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://unpkg.com/medium-zoom/dist/medium-zoom.css">
     <style>
-        /* Add your custom styles here */
-        .js-resize-sensor, .t-CardsRegion, .a-CardView-media, .a-TMV-w-scroll {
-            overflow: visible!important;
+        /* CSS for the <br> elements */
+        .br-element {
+            display: none; /* Initially hidden */
         }
     </style>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const pinchZoom = (imageElement) => {
-                let imageElementScale = 1;
-                let start = {};
-
-                const distance = (event) => {
-                    return Math.hypot(event.touches[0].pageX - event.touches[1].pageX, event.touches[0].pageY - event.touches[1].pageY);
-                };
-
-                imageElement.addEventListener('touchstart', (event) => {
-                    if (event.touches.length === 2) {
-                        event.preventDefault();
-                        start.x = (event.touches[0].pageX + event.touches[1].pageX) / 2;
-                        start.y = (event.touches[0].pageY + event.touches[1].pageY) / 2;
-                        start.distance = distance(event);
-                    }
-                });
-
-                imageElement.addEventListener('touchmove', (event) => {
-                    if (event.touches.length === 2) {
-                        event.preventDefault();
-                        let scale;
-                        if (event.scale) {
-                            scale = event.scale;
-                        } else {
-                            const deltaDistance = distance(event);
-                            scale = deltaDistance / start.distance;
-                        }
-                        imageElementScale = Math.min(Math.max(1, scale), 4);
-                        const deltaX = (((event.touches[0].pageX + event.touches[1].pageX) / 2) - start.x) * 2;
-                        const deltaY = (((event.touches[0].pageY + event.touches[1].pageY) / 2) - start.y) * 2;
-                        const transform = `translate3d(${deltaX}px, ${deltaY}px, 0) scale(${imageElementScale})`;
-                        imageElement.style.transform = transform;
-                        imageElement.style.WebkitTransform = transform;
-                        imageElement.style.zIndex = "9999";
-                    }
-                });
-
-                imageElement.addEventListener('touchend', (event) => {
-                    imageElement.style.transform = "";
-                    imageElement.style.WebkitTransform = "";
-                    imageElement.style.zIndex = "";
-                });
-            };
-
-            const zoomableImages = document.querySelectorAll('.zoomable-image');
-            zoomableImages.forEach(image => {
-                pinchZoom(image);
-            });
-
-            // Add event listener for touchmove on the document
-            document.addEventListener('touchmove', (event) => {
-                if (event.touches.length === 1) {
-                    event.stopPropagation(); // Stop propagation to prevent interference with pinch zoom
-                }
-            }, { passive: false });
-        });
-    </script>
 </head>
 <body>
-    <div id="sch">
-        <div class="image-frame">
-            <img src="images/small_logo.jpg" alt="Huyatina Image">
+
+    <div id="preview">
+        <img id="imagefirst" src="images/preview1.jpg">
+    </div>
+
+    <div id="first_reg" style="display: none;">
+        <div class="main-image-frame">
+            <img src="images/logo.jpg" alt="Huyatina Image">
         </div>
         <br>
-        <h1>Schedule</h1>
-        <div id="contectimg">
-            <img id="zoomImage1" src="images/prog2.jpg" class="zoomable-image">
-        </div> 
-        <div id="contectimg">
-            <img id="zoomImage2" src="images/prog4.jpg" class="zoomable-image">
-        </div>
-        <div id="contectimg">
-            <img id="zoomImage3" src="images/check2.jpg" class="zoomable-image">
-        </div>   
-        <div id="contectimg">     
-            <img id="zoomImage4" src="images/fhfhfh.jpeg" class="zoomable-image">
-        </div>
-        <div id="contectimg">
-            <img id="zoomImage5" src="images/prog2.jpg" class="zoomable-image">
-        </div>
-        <br> 
-        <br> 
+        <h1>Регистрация</h1>
+        <hr style="border: 0; height: 1px; background-color: #ccc; margin: 30px 0;">
+
+        <form method="POST">
+            <!-- ADD "REQUIRED TO EVERY FIELD" -->
+            <input type="text" id="name" placeholder="Имя" required> 
+            <input type="text" id="lastname" placeholder="Фамилия" >
+            <input type="text" id="email" placeholder="e-mail@gmail.com" >
+            <input type="text" id="tel" placeholder="Телефон" >
+            <input type="text" id="city" placeholder="Город" >
+            <!-- <input type="text" id="school" placeholder="school" >
+            <input type="text" id="position" placeholder="position"> -->
+            <button id="register">Зарегистрироваться</button>
+        </form>
     </div>
+
+    <!-- <br> elements for adjusting page layout -->
+    <br class="br-element" id="br1">
+
+    <script>
+        const registerButton = document.getElementById('register');
+        
+        // Get references to the <br> elements
+        const brElements = document.querySelectorAll('.br-element');
+
+        // Function to handle focus event
+        function handleFocus() {
+            // Show <br> elements when the keyboard is opened
+            brElements.forEach(br => {
+                br.style.display = 'block';
+            });
+        }
+
+        // Function to handle blur event
+        function handleBlur() {
+            // Hide <br> elements when the keyboard is closed
+            brElements.forEach(br => {
+                br.style.display = 'none';
+            });
+        }
+
+        // Add event listeners for focus and blur events
+        window.addEventListener('focus', handleFocus);
+        window.addEventListener('blur', handleBlur);
+
+        // Event listener for registration button click
+        registerButton.addEventListener('click', async (event) => {
+            event.preventDefault(); // Prevent form submission
+
+            // Get input values
+            let name = document.getElementById("name").value;
+            let last_name = document.getElementById("lastname").value;
+            let email = document.getElementById("email").value;
+            let tel = document.getElementById("tel").value;
+
+            // Basic checks
+            if (!name || !last_name || !email || !tel) {
+                alert("Please fill in all required fields.");
+                return;
+            }
+
+            let data = {
+                name: name,
+                last_name: last_name,
+                email: email,
+                tel: tel,
+                id: window.Telegram.WebApp.initDataUnsafe.user.id // Change to access the user ID correctly
+            };
+
+            try {
+                // Make an HTTP POST request to your server
+                let response = await fetch('https://11d8-2a02-ff0-220-a1c6-e1bd-b960-4080-14ca.ngrok-free.app/submit_registration', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                });
+
+                if (response.ok) {
+                    // Server successfully processed the request
+                    let responseData = await response.json();
+                    console.log(responseData);
+                    window.Telegram.WebApp.showAlert("Registration successful!", () => {
+                        // Callback function after the alert is closed
+                        // Redirect to the home page
+                        window.location.href = 'https://carrion626.github.io/home.html';
+                    });
+                } else {
+                    console.error('Server returned an error:', response.status);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        });
+
+    </script>
 </body>
 </html>
-
-
-
-
-/* _____________CONTENT_________________  TODO: FIX */
-#contectimg {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 90%;
-    margin: 0 auto;
-    margin-top: 20px;
-    border: 1px solid #bdbcbc;
-    padding-top: 140%; /* 2:3 aspect ratio */
-    overflow: hidden;
-    position: relative;
-}
-
-#contectimg img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    transition: transform 0.3s ease; /* Smooth transition */
-}
