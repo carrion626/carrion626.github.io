@@ -37,8 +37,7 @@
             <!-- <input type="text" id="school" placeholder="school" >
             <input type="text" id="position" placeholder="position"> -->
             <button id="register">Зарегистрироваться</button>
-            <br>
-            <br>
+            <br id="br1">
         </form>
     </div>
 
@@ -139,6 +138,32 @@
                 console.error('Error:', error);
             }
         });
+        // Add an event listener for the focus event
+        window.addEventListener('focus', handleFocus);
+        
+        // Add an event listener for the blur event
+        window.addEventListener('blur', handleBlur);
+
+        function handleFocus() {
+            // Add <br> elements when the keyboard is opened
+            document.getElementById('br1').style.display = 'block';
+            // document.getElementById('br2').style.display = 'block';
+            // document.getElementById('br3').style.display = 'block';
+            // document.getElementById('br4').style.display = 'block';
+            // document.getElementById('br5').style.display = 'block';
+            // document.getElementById('br6').style.display = 'block';
+
+        }
+
+        function handleBlur() {
+            // Remove <br> elements when the keyboard is closed
+            document.getElementById('br1').style.display = 'none';
+            // document.getElementById('br2').style.display = 'none';
+            // document.getElementById('br3').style.display = 'none';
+            // document.getElementById('br4').style.display = 'none';
+            // document.getElementById('br5').style.display = 'none';
+            // document.getElementById('br6').style.display = 'none';
+        }
 
     </script>
       
