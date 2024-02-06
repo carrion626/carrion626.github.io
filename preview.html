@@ -47,19 +47,7 @@
 
         tg.MainButton.text = "Регистрация"; //изменяем текст кнопки 
         tg.MainButton.show()
-        Telegram.WebApp.onEvent('mainButtonClicked', function(){
-            window.location.href = "https://carrion626.github.io/home.html";
-        });
-
-
-
-
-
-        const registerButton = document.getElementById('register');
-
-        let reg = document.getElementById("register");
-    
-        reg.addEventListener("click", async (event) => {
+        Telegram.WebApp.onEvent('mainButtonClicked', async (event) => {
             // Prevent the default form submission behavior
             event.preventDefault();
 
