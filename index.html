@@ -48,7 +48,41 @@
     <br class="br-element" id="br1">
 
     <script>
+        const images = ['preview1.jpg', 'preview2.jpg', 'preview3.jpg', 'preview4.jpg', 'preview5.jpg'];
+        let currentIndex = 0;
+        
+        let tg = window.Telegram.WebApp;
+        tg.ready()
+        tg.expand()
+        
+        
+        const image = document.getElementById('imagefirst');
+        const previewDiv = document.getElementById('preview');
+        const firstRegDiv = document.getElementById('first_reg');
+        tg.MainButton.text = "Next >>"; //изменяем текст кнопки
+        tg.MainButton.show()
+
         const registerButton = document.getElementById('register');
+        Telegram.WebApp.onEvent('mainButtonClicked', function(){
+            // Update the index for the next image
+            currentIndex = (currentIndex + 1) % images.length;
+            
+            if (currentIndex === 0) {
+                // If the end is reached, hide "preview" and show "first_reg"
+                previewDiv.style.display = 'none';
+                firstRegDiv.style.display = 'block';
+                tg.MainButton.hide()
+            } else {
+                // Set the 'src' attribute to the next image
+                image.src = 'images/' + images[currentIndex];
+            }
+        });
+        document.body.addEventListener('click', (event) => {
+            const clickedElement = event.target;
+            if (clickedElement.tagName !== 'INPUT' && clickedElement !== registerButton) {
+                document.activeElement.blur();
+            }
+        });
         
         // Get references to the <br> elements
         const brElements = document.querySelectorAll('.br-element');
