@@ -9,18 +9,15 @@
     <title>Main page</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link rel="stylesheet" href="style.css">
-    <style>
-        /* CSS for the <br> elements */
-        .br-element {
-            display: none; /* Initially hidden */
-        }
-    </style>
 </head>
 <body>
 
     <div id="preview">
         <img id="imagefirst" src="images/preview1.jpg">
+
     </div>
+
+
 
     <div id="first_reg" style="display: none;">
         <div class="main-image-frame">
@@ -40,41 +37,86 @@
             <!-- <input type="text" id="school" placeholder="school" >
             <input type="text" id="position" placeholder="position"> -->
             <button id="register">Зарегистрироваться</button>
+            
         </form>
     </div>
-
-    <!-- <br> elements for adjusting page layout -->
-    <br class="br-element" id="br1">
+    <br id="br1">
 
     <script>
-        const registerButton = document.getElementById('register');
+        const images = ['preview1.jpg', 'preview2.jpg', 'preview3.jpg', 'preview4.jpg', 'preview5.jpg'];
+        let currentIndex = 0;
         
-        // Get references to the <br> elements
-        const brElements = document.querySelectorAll('.br-element');
 
-        // Function to handle focus event
-        function handleFocus() {
-            // Show <br> elements when the keyboard is opened
-            brElements.forEach(br => {
-                br.style.display = 'block';
-            });
-        }
+        let tg = window.Telegram.WebApp;
+        tg.ready()
+        tg.expand()
+        
+        
 
-        // Function to handle blur event
-        function handleBlur() {
-            // Hide <br> elements when the keyboard is closed
-            brElements.forEach(br => {
-                br.style.display = 'none';
-            });
-        }
+        const image = document.getElementById('imagefirst');
+        const previewDiv = document.getElementById('preview');
+        const firstRegDiv = document.getElementById('first_reg');
+        tg.MainButton.text = "Next >>"; //изменяем текст кнопки 
+        tg.MainButton.show()
+        const registerButton = document.getElementById('register');
 
-        // Add event listeners for focus and blur events
+        Telegram.WebApp.onEvent('mainButtonClicked', function(){
+            // Update the index for the next image
+            currentIndex = (currentIndex + 1) % images.length;
+            
+            if (currentIndex === 0) {
+                // If the end is reached, hide "preview" and show "first_reg"
+                previewDiv.style.display = 'none';
+                firstRegDiv.style.display = 'block';
+                tg.MainButton.hide()
+            } else {
+                // Set the 'src' attribute to the next image
+                image.src = 'images/' + images[currentIndex];
+            }
+
+        });
+
+        document.body.addEventListener('click', (event) => {
+            const clickedElement = event.target;
+
+            if (clickedElement.tagName !== 'INPUT' && clickedElement !== registerButton) {
+                document.activeElement.blur();
+            }
+        });
+        // Add an event listener for the focus event
         window.addEventListener('focus', handleFocus);
+        
+        // Add an event listener for the blur event
         window.addEventListener('blur', handleBlur);
 
-        // Event listener for registration button click
-        registerButton.addEventListener('click', async (event) => {
-            event.preventDefault(); // Prevent form submission
+        function handleFocus() {
+            // Add <br> elements when the keyboard is opened
+            document.getElementById('br1').style.display = 'block';
+            // document.getElementById('br2').style.display = 'block';
+            // document.getElementById('br3').style.display = 'block';
+            // document.getElementById('br4').style.display = 'block';
+            // document.getElementById('br5').style.display = 'block';
+            // document.getElementById('br6').style.display = 'block';
+
+        }
+
+        function handleBlur() {
+            // Remove <br> elements when the keyboard is closed
+            document.getElementById('br1').style.display = 'none';
+            // document.getElementById('br2').style.display = 'none';
+            // document.getElementById('br3').style.display = 'none';
+            // document.getElementById('br4').style.display = 'none';
+            // document.getElementById('br5').style.display = 'none';
+            // document.getElementById('br6').style.display = 'none';
+        }
+    </script>
+
+    <script>
+        let reg = document.getElementById("register");
+    
+        reg.addEventListener("click", async (event) => {
+            // Prevent the default form submission behavior
+            event.preventDefault();
 
             // Get input values
             let name = document.getElementById("name").value;
@@ -93,8 +135,9 @@
                 last_name: last_name,
                 email: email,
                 tel: tel,
-                id: window.Telegram.WebApp.initDataUnsafe.user.id // Change to access the user ID correctly
+                id: tg.initDataUnsafe.user.id
             };
+            
 
             try {
                 // Make an HTTP POST request to your server
@@ -105,16 +148,16 @@
                     },
                     body: JSON.stringify(data),
                 });
-
                 if (response.ok) {
                     // Server successfully processed the request
                     let responseData = await response.json();
                     console.log(responseData);
-                    window.Telegram.WebApp.showAlert("Registration successful!", () => {
-                        // Callback function after the alert is closed
-                        // Redirect to the home page
-                        window.location.href = 'https://carrion626.github.io/home.html';
-                    });
+                    tg.showAlert("Registration successful!", () => {
+                    // Callback function after the alert is closed
+                    // Redirect to the home page
+
+                    window.location.href = 'https://carrion626.github.io/home.html';
+                });
                 } else {
                     console.error('Server returned an error:', response.status);
                 }
@@ -124,5 +167,7 @@
         });
 
     </script>
+      
 </body>
 </html>
+
