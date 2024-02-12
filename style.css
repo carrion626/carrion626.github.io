@@ -129,7 +129,7 @@ button:hover {
     margin: 0 auto;
     margin-top: 20px;
     border: 1px solid #bdbcbc;
-    padding-top: 36%; /* 2:3 aspect ratio */
+    padding-top: 36%;
     overflow: hidden;
     position: relative;
 }
